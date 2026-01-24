@@ -1,9 +1,9 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using StoreManagementSystem.Models;
-
 namespace StoreManagementSystem.Controllers
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+
+    using ViewModels;
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
