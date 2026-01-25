@@ -10,7 +10,7 @@
         {
         }
 
-        public DbSet<ProductItem> Products { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
 
         public DbSet<Cart> Carts { get; set; } = null!;
 

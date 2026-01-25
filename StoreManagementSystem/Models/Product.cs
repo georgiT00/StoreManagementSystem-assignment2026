@@ -4,10 +4,10 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static Common.EntityValidation;
-    public class ProductItem
+    public class Product
     {
         [Key]
-        public int ProductItemId { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         [MaxLength(ItemNameMaxLength)]

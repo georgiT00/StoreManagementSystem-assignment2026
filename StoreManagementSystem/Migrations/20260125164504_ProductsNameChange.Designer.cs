@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreManagementSystem.Data;
 
@@ -11,9 +12,11 @@ using StoreManagementSystem.Data;
 namespace StoreManagementSystem.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260125164504_ProductsNameChange")]
+    partial class ProductsNameChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace StoreManagementSystem.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int?>("ProductItemId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -64,7 +67,7 @@ namespace StoreManagementSystem.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductItemId");
 
                     b.ToTable("CartItems");
                 });
@@ -129,7 +132,7 @@ namespace StoreManagementSystem.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int?>("ProductItemId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -142,7 +145,7 @@ namespace StoreManagementSystem.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductItemId");
 
                     b.ToTable("OrderItems");
                 });
@@ -286,7 +289,7 @@ namespace StoreManagementSystem.Migrations
 
                     b.HasOne("StoreManagementSystem.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductItemId");
 
                     b.Navigation("Cart");
 
@@ -314,7 +317,7 @@ namespace StoreManagementSystem.Migrations
 
                     b.HasOne("StoreManagementSystem.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductItemId");
 
                     b.Navigation("Order");
 
@@ -335,7 +338,7 @@ namespace StoreManagementSystem.Migrations
             modelBuilder.Entity("StoreManagementSystem.Models.Product", b =>
                 {
                     b.HasOne("StoreManagementSystem.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -369,7 +372,7 @@ namespace StoreManagementSystem.Migrations
 
             modelBuilder.Entity("StoreManagementSystem.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("StoreManagementSystem.Models.Order", b =>

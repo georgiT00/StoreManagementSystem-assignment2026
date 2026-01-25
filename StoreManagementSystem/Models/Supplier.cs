@@ -12,6 +12,6 @@ namespace StoreManagementSystem.Models
         public string SupplierName { get; set; }
 
         public ICollection<User> Users { get; set; } = new HashSet<User>();
-        public ICollection<ProductItem> ProductItems { get; set; } = new HashSet<ProductItem>();
+        public ICollection<Product> Products { get; set; } = new HashSet<Product>();
     }
 }

@@ -15,6 +15,6 @@
         [MaxLength(CategoryDescriptionMaxLength)]
         public string Description { get; set; }
 
-        public ICollection<ProductItem> Items { get; set; } = new HashSet<ProductItem>();
+        public ICollection<Product> Products { get; set; } = new HashSet<Product>();
     }
 }

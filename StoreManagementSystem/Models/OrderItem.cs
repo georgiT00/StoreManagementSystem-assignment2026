@@ -13,10 +13,9 @@
         public int OrderId { get; set; }
         public Order Order { get; set; } = null!;
 
-        [ForeignKey(nameof(ProductItem))]
-        public int? ProductItemId { get; set; }
-        public ProductItem ProductItem { get; set; }
-
+        [ForeignKey(nameof(Product))]
+        public int? ProductId { get; set; }
+        public Product Product { get; set; }
 
         [Column(TypeName = UnitPriceType)]
         public decimal UnitPrice { get; set; }

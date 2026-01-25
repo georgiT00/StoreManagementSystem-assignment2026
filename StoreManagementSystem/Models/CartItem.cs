@@ -12,9 +12,9 @@ namespace StoreManagementSystem.Models
         public int CartId { get; set; }
         public Cart Cart { get; set; } = null!;
 
-        [ForeignKey(nameof(ProductItem))]
-        public int? ProductItemId { get; set; }
-        public ProductItem ProductItem { get; set; }
+        [ForeignKey(nameof(Product))]
+        public int? ProductId { get; set; }
+        public Product Product { get; set; }
 
         public int Quantity { get; set; }
     }
