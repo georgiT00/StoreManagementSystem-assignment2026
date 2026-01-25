@@ -2,8 +2,9 @@ namespace StoreManagementSystem.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
-
+    using StoreManagementSystem.Global;
     using ViewModels;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +16,10 @@ namespace StoreManagementSystem.Controllers
 
         public IActionResult Index()
         {
+            var setting = AppSettings.Database.ConnectionString;
+
+
+
             return View();
         }
 

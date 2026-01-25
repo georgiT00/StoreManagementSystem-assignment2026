@@ -4,14 +4,14 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static Common.EntityValidation;
-    public class Item
+    public class ProductItem
     {
         [Key]
-        public int Id { get; set; }
+        public int ProductItemId { get; set; }
 
         [Required]
         [MaxLength(ItemNameMaxLength)]
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
 
         public int Quantity { get; set; }
 
@@ -20,9 +20,10 @@
 
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-
         public Category Category { get; set; } = null!;
 
-        public ICollection<ProductOrder> ProductOrders { get; set; } = new HashSet<ProductOrder>();
+        [ForeignKey(nameof(Supplier))]
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
     }
 }

@@ -4,15 +4,26 @@
     {
         //Category
         public const int CategoryDescriptionMaxLength = 200;
+        public const int CategoryNameMaxLength = 30;
 
-        //Customer
-        public const int CustomerFirstNameMaxLength = 100;
-        public const int CustomerLastNameMaxLength = 100;
-        public const string CustomerEmailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-        public const string CustomerPhoneNumberRegex = @"^\+?[1-9]\d{1,14}$";
+        //User
+        public const int UserFirstNameMaxLength = 100;
+        public const int UserLastNameMaxLength = 100;
+        public const int UserNameMaxLength = 50;
+        public const int UserPasswordMinLength = 6;
+        public const int UserPasswordMaxLength = 20;
 
-        //Item
+        //ProductItem
         public const int ItemNameMaxLength = 150;
         public const string ItemPriceType = "DECIMAL(5,2)";
+
+        //Order
+        public const string TotalAmountType = "DECIMAL(7,2)";
+
+        //OrderItem
+        public const string UnitPriceType = "DECIMAL(5,2)";
+
+        //Payment
+        public const string AmountType = "DECIMAL(7,2)";
     }
 }

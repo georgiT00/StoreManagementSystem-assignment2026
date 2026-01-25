@@ -3,17 +3,29 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using Enums;
+    using static Common.EntityValidation;    
+
     public class Order
     {
         [Key]
-        public int Id { get; set; }
+        public int OrderId { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        public User User { get; set; }
 
-        [ForeignKey(nameof(Customer))]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; } = null!;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public ICollection<ProductOrder> OrderProducts { get; set; } = new HashSet<ProductOrder>();
+        [Column(TypeName = TotalAmountType)]
+        public decimal TotalAmount { get; set; }
+
+        public OrderStatus Status { get; set; }
+
+        public ICollection<OrderItem> Items { get; set; } = new HashSet<OrderItem>();
+
+        public Payment Payment { get; set; }
     }
+
 }

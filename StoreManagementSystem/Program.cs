@@ -1,25 +1,22 @@
 namespace StoreManagementSystem
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using StoreManagementSystem.Global;
 
     using Data;
+
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            AppSettings.Initialize(builder.Configuration);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
+            builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database.ConnectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<StoreDbContext>();
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<StoreDbContext>();
 
             builder.Services.AddControllersWithViews();
 

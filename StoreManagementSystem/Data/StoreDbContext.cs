@@ -1,21 +1,40 @@
 ﻿namespace StoreManagementSystem.Data
 {
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
 
-    public class StoreDbContext : IdentityDbContext
+    public class StoreDbContext : DbContext
     {
-        public StoreDbContext(DbContextOptions<StoreDbContext> options)
+        public StoreDbContext(DbContextOptions options)
             : base(options)
         {
         }
 
+        public DbSet<ProductItem> Products { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        public DbSet<Cart> Carts { get; set; } = null!;
+
+        public DbSet<CartItem> CartItems { get; set; } = null!; 
+
+        public DbSet<Category> Categories { get; set; } = null!; 
+
+        public DbSet<Order> Orders { get; set; } = null!;
+
+        public DbSet<OrderItem> OrderItems { get; set; } = null!;
+
+        public DbSet<Payment> Payments { get; set; } = null!;
+
+        public DbSet<Supplier> Suppliers { get; set; } = null!;
+
+        public DbSet<User> Users { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<ProductOrder>()
-                .Property(po => po.Quantity)
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Payment)
+                .WithOne(p => p.Order)
+                .HasForeignKey<Payment>(p => p.OrderId);
+
         }
     }
 }

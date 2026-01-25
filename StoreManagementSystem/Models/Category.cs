@@ -2,19 +2,19 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using Enums;
     using static Common.EntityValidation;
     public class Category
     {
         [Key]
-        public int Id { get; set; }
-
-        public CategoryType Type { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
-        [MaxLength(CategoryDescriptionMaxLength)]
-        public string Description { get; set; } = null!;
+        [MaxLength(CategoryNameMaxLength)]
+        public string CategoryName { get; set; } = null!;
 
-        public ICollection<Item> Items { get; set; } = new HashSet<Item>();
+        [MaxLength(CategoryDescriptionMaxLength)]
+        public string Description { get; set; }
+
+        public ICollection<ProductItem> Items { get; set; } = new HashSet<ProductItem>();
     }
 }
