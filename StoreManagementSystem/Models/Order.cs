@@ -24,8 +24,6 @@
         public OrderStatus Status { get; set; }
 
         public ICollection<OrderItem> Items { get; set; } = new HashSet<OrderItem>();
-
-        public Payment Payment { get; set; }
     }
 
 }

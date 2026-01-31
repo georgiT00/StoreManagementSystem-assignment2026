@@ -22,19 +22,8 @@
 
         public DbSet<OrderItem> OrderItems { get; set; } = null!;
 
-        public DbSet<Payment> Payments { get; set; } = null!;
-
         public DbSet<Supplier> Suppliers { get; set; } = null!;
 
         public DbSet<User> Users { get; set; } = null!;
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Order>()
-                .HasOne(o => o.Payment)
-                .WithOne(p => p.Order)
-                .HasForeignKey<Payment>(p => p.OrderId);
-
-        }
     }
 }

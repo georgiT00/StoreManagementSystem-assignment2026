@@ -15,7 +15,7 @@ namespace StoreManagementSystem.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public ICollection<CartItem> Items { get; set; } = new HashSet<CartItem>();
+        public ICollection<CartItem> Items { get; set; } = new List<CartItem>();
     }
 
 }

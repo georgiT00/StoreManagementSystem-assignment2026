@@ -18,7 +18,7 @@
         public Product Product { get; set; }
 
         [Column(TypeName = UnitPriceType)]
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }  
 
         public int Quantity { get; set; }
     }

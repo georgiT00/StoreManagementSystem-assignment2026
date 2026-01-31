@@ -4,6 +4,7 @@ namespace StoreManagementSystem
     using StoreManagementSystem.Global;
 
     using Data;
+    using Microsoft.AspNetCore.Identity;
 
     public class Program
     {
@@ -15,10 +16,12 @@ namespace StoreManagementSystem
             builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database.ConnectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<StoreDbContext>();
+           /* builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<StoreDbContext>();*/
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
