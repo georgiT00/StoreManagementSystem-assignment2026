@@ -39,8 +39,8 @@
             </div>
 
             <div class="mt-auto p-6">
-                <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold text-center" asp-area="" asp-controller="User" asp-action="Index">
-                    User
+                <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold text-center" asp-area="" asp-controller="Cart" asp-action="Index">
+                    Cart
                 </a>
             </div>
         </nav>
@@ -54,7 +54,9 @@
             &copy; 2026 - StoreManagementSystem -
             <a class="text-blue-600 hover:underline" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
