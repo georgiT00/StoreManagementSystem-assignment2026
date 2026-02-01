@@ -1,0 +1,34 @@
+[
+  {
+    "CategoryId": 1,
+    "CategoryName": "Electronics"
+  },
+  {
+    "CategoryId": 2,
+    "CategoryName": "Sports"
+  },
+  {
+    "CategoryId": 3,
+    "CategoryName": "Clothing"
+  },
+  {
+    "CategoryId": 4,
+    "CategoryName": "Books"
+  },
+  {
+    "CategoryId": 5,
+    "CategoryName": "Office"
+  },
+  {
+    "CategoryId": 6,
+    "CategoryName": "Audio"
+  },
+  {
+    "CategoryId": 7,
+    "CategoryName": "Home&Garden"
+  },
+  {
+    "CategoryId": 8,
+    "CategoryName": "Kitchen"
+  }
+]

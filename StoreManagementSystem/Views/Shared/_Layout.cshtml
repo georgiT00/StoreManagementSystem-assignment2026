@@ -4,59 +4,57 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreManagementSystem</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/StoreManagementSystem.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex flex-col">
     <header>
 
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="position-sticky pt-3 mx-3">
-                    <ul class="nav flex-column gap-3">
-                        <li class="nav-item border-5 rounded-2 border-warning">
-                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item border-2 rounded-2 border-warning">
-                            <a class="nav-link" asp-area="" asp-page="/Products/Index">
-                                Products
-                            </a>
-                        </li>
-                        <li class="nav-item border-2 rounded-2 border-warning">
-                            <a class="nav-link" asp-area="" asp-page="/Orders/Index">
-                                Orders
-                            </a>
-                        </li>
-                        <li class="nav-item border-2 rounded-2 border-warning">
-                            <a class="nav-link" asp-area="" asp-page="/Suppliers/Index">
-                                Suppliers
-                            </a>
-                        </li>
-                        <li class="nav-item border-2 rounded-2 border-warning">
-                            <a class="nav-link" asp-area="" asp-page="/Users/Index">
-                                Users
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                @RenderBody()
-            </main>
-        </div>
+    <div class="flex flex-1">
+        <nav class="w-64 bg-white shadow-md flex flex-col h-screen">
+            <div class="py-5 px-6 text-5xl text-center border-5 rounded-3">Store</div>
+            <div class="p-6">
+                <ul class="space-y-4">
+                    <li>
+                        <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold" asp-area="" asp-controller="Home" asp-action="Index">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Product" asp-action="Index">
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Order" asp-action="Index">
+                            Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Supplier" asp-action="Index">
+                            Suppliers
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-auto p-6">
+                <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold text-center" asp-area="" asp-controller="User" asp-action="Index">
+                    User
+                </a>
+            </div>
+        </nav>
+        <!-- Main content -->
+        <main class="flex-1 p-8">
+            @RenderBody()
+        </main>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - StoreManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-t text-gray-500 text-sm py-4 mt-auto bg-white">
+        <div class="container mx-auto px-4">
+            &copy; 2026 - StoreManagementSystem -
+            <a class="text-blue-600 hover:underline" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

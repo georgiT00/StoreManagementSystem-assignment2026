@@ -1,0 +1,43 @@
+[
+  {
+    "SupplierId": 1,
+    "SupplierName": "Waters, Wolf and MacGyver"
+  },
+  {
+    "SupplierId": 2,
+    "SupplierName": "Bednar, Luettgen and Abernathy"
+  },
+  {
+    "SupplierId": 3,
+    "SupplierName": "Rippin and Sons"
+  },
+  {
+    "SupplierId": 4,
+    "SupplierName": "Pollich LLC"
+  },
+  {
+    "SupplierId": 5,
+    "SupplierName": "Schowalter, Kiehn and Rolfson"
+  },
+  {
+    "SupplierId": 6,
+    "SupplierName": "Hartmann-Jaskolski"
+  },
+  {
+    "SupplierId": 7,
+    "SupplierName": "Stanton-Cummerata"
+  },
+  {
+    "SupplierId": 8,
+    "SupplierName": "O'Keefe-Ryan"
+  },
+  {
+    "SupplierId": 9,
+    "SupplierName": "Bergnaum LLC"
+  },
+  {
+    "SupplierId": 10,
+    "SupplierName": "Donnelly-Kris"
+  }
+
+]

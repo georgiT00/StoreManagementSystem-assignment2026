@@ -25,5 +25,11 @@
         public DbSet<Supplier> Suppliers { get; set; } = null!;
 
         public DbSet<User> Users { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        }
     }
 }

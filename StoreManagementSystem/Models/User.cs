@@ -14,6 +14,11 @@
         public string Username { get; set; } = null!;
 
         [Required]
+        [MaxLength(UserEmailMaxLength)]
+        [EmailAddress]
+        public string EmailAddress { get; set; } = null!;
+
+        [Required]
         [MinLength(UserPasswordMinLength)]
         [MaxLength(UserPasswordMaxLength)]
         public string Password { get; set; } = null!;
@@ -30,6 +35,6 @@
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; } = null!;
 
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order> Orders { get; set; } = [];
     }
 }

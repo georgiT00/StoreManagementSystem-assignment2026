@@ -1,0 +1,162 @@
+[
+  {
+    "ProductId": 1,
+    "Name": "Car Speakers",
+    "Quantity": 57,
+    "Price": 15.49,
+    "CategoryId": 6,
+    "SupplierId": 1
+  },
+  {
+    "ProductId": 2,
+    "Name": "Herb Garden Planter Box",
+    "Quantity": 60,
+    "Price": 49.99,
+    "CategoryId": 7,
+    "SupplierId": 2
+  },
+  {
+    "ProductId": 3,
+    "Name": "Metallica T-Shirt",
+    "Quantity": 94,
+    "Price": 3.49,
+    "CategoryId": 3,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 4,
+    "Name": "Black Pen",
+    "Quantity": 31,
+    "Price": 2.99,
+    "CategoryId": 5,
+    "SupplierId": 4
+  },
+  {
+    "ProductId": 5,
+    "Name": "Portable Bluetooth Headphones",
+    "Quantity": 96,
+    "Price": 79.99,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 6,
+    "Name": "Wireless Car Charger",
+    "Quantity": 35,
+    "Price": 24.99,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 7,
+    "Name": "100-Page Notebook",
+    "Quantity": 77,
+    "Price": 2.49,
+    "CategoryId": 5,
+    "SupplierId": 7
+  },
+  {
+    "ProductId": 8,
+    "Name": "Car Sunshade",
+    "Quantity": 83,
+    "Price": 19.99,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 9,
+    "Name": "Scented Candles",
+    "Quantity": 49,
+    "Price": 19.99,
+    "CategoryId": 7,
+    "SupplierId": 9
+  },
+  {
+    "ProductId": 10,
+    "Name": "Cushion Covers",
+    "Quantity": 27,
+    "Price": 35.99,
+    "CategoryId": 7,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 11,
+    "Name": "Mini Electric Kettle",
+    "Quantity": 86,
+    "Price": 29.99,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 12,
+    "Name": "Incense Holder",
+    "Quantity": 76,
+    "Price": 14.99,
+    "CategoryId": 7,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 13,
+    "Name": "Jogging Top",
+    "Quantity": 18,
+    "Price": 5.99,
+    "CategoryId": 2,
+    "SupplierId": 4
+  },
+  {
+    "ProductId": 14,
+    "Name": "Warm Knit Beanie",
+    "Quantity": 78,
+    "Price": 19.99,
+    "CategoryId": 3,
+    "SupplierId": 1
+  },
+  {
+    "ProductId": 15,
+    "Name": "Samsung Galaxy Smartwatch",
+    "Quantity": 11,
+    "Price": 249.99,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 16,
+    "Name": "Gone Girl",
+    "Quantity": 2,
+    "Price": 16.99,
+    "CategoryId": 4,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 17,
+    "Name": "Utensils Set",
+    "Quantity": 81,
+    "Price": 4.49,
+    "CategoryId": 8,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 18,
+    "Name": "PC Microphone",
+    "Quantity": 10,
+    "Price": 10.59,
+    "CategoryId": 1,
+    "SupplierId": 5
+  },
+  {
+    "ProductId": 19,
+    "Name": "Wrist Wrap",
+    "Quantity": 60,
+    "Price": 4.99,
+    "CategoryId": 2,
+    "SupplierId": 3
+  },
+  {
+    "ProductId": 20,
+    "Name": "Pencil Set",
+    "Quantity": 60,
+    "Price": 5.99,
+    "CategoryId": 5,
+    "SupplierId": 3
+  }
+]

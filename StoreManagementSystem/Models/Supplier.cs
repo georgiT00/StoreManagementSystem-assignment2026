@@ -1,14 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace StoreManagementSystem.Models
+﻿namespace StoreManagementSystem.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using static Common.EntityValidation;
     public class Supplier
     {
         [Key]
         public int SupplierId { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(SupplierNameMaxLength)]
         public string SupplierName { get; set; }
 
         public ICollection<User> Users { get; set; } = new HashSet<User>();
