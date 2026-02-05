@@ -2,8 +2,6 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Data;
-    using Models;
-    using Microsoft.EntityFrameworkCore;
 
     public class ProductController : Controller
     {
@@ -13,16 +11,16 @@
             dbContext = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            IEnumerable<Product> products = dbContext
-                .Products
+            /*IEnumerable<Product> products = dbContext.Products
                 .AsNoTracking()
                 .Include(p => p.Category)
                 .Include(p => p.Supplier)
-                .ToList();
+                .ToList();*/
 
-            return View(products);
+            return View();
         }
     }
 }

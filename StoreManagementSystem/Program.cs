@@ -1,7 +1,7 @@
 namespace StoreManagementSystem
 {
     using Microsoft.EntityFrameworkCore;
-    using StoreManagementSystem.Global;
+    using GCommon;
 
     using Data;
     using Microsoft.AspNetCore.Identity;
@@ -13,7 +13,7 @@ namespace StoreManagementSystem
             var builder = WebApplication.CreateBuilder(args);
             AppSettings.Initialize(builder.Configuration);
 
-            builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database.ConnectionString));
+            builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database?.ConnectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
            /* builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

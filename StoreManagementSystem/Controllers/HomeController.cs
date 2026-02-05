@@ -2,7 +2,6 @@ namespace StoreManagementSystem.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
-    using StoreManagementSystem.Global;
     using ViewModels;
 
     public class HomeController : Controller
@@ -16,10 +15,6 @@ namespace StoreManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            var setting = AppSettings.Database.ConnectionString;
-
-
-
             return View();
         }
 
