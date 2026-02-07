@@ -10,7 +10,7 @@
 
         [Required]
         [MaxLength(SupplierNameMaxLength)]
-        public string SupplierName { get; set; }
+        public string SupplierName { get; set; } = null!;
 
         public ICollection<User> Users { get; set; } = new HashSet<User>();
         public ICollection<Product> Products { get; set; } = new HashSet<Product>();

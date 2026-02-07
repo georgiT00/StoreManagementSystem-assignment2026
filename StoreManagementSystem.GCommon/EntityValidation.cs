@@ -10,12 +10,10 @@
         public const int SupplierNameMaxLength = 100;
 
         //User
+        public const int UserFirstNameMinLength = 3;
+        public const int UserLastNameMinLength = 3;
         public const int UserFirstNameMaxLength = 100;
         public const int UserLastNameMaxLength = 100;
-        public const int UserNameMaxLength = 50;
-        public const int UserPasswordMinLength = 6;
-        public const int UserPasswordMaxLength = 20;
-        public const int UserEmailMaxLength = 150;
 
         //ProductItem
         public const int ItemNameMaxLength = 150;

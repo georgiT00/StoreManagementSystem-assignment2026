@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagementSystem.GComm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagementSystem.ViewModels", "StoreManagementSystem.Web.ViewModels\StoreManagementSystem.ViewModels.csproj", "{E0186995-74E8-4BCE-A532-097A15482855}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AFDC4FC4-C8E5-4862-846B-50536B59E3EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagementSystem.Services.Core", "StoreManagementSystem.Services.Core\StoreManagementSystem.Services.Core.csproj", "{0D723A0A-DCE8-4889-935F-BC5A6A8248DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{E0186995-74E8-4BCE-A532-097A15482855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0186995-74E8-4BCE-A532-097A15482855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0186995-74E8-4BCE-A532-097A15482855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D723A0A-DCE8-4889-935F-BC5A6A8248DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D723A0A-DCE8-4889-935F-BC5A6A8248DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D723A0A-DCE8-4889-935F-BC5A6A8248DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D723A0A-DCE8-4889-935F-BC5A6A8248DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +60,7 @@ Global
 		{F660EDE1-9CA1-4A8C-963A-D3499D5681DE} = {AC442569-F1A2-4ABB-A3BC-E1A786CF8D43}
 		{37EC6E7A-0CBE-44C5-96E5-D0B7351CE2DB} = {AC442569-F1A2-4ABB-A3BC-E1A786CF8D43}
 		{E0186995-74E8-4BCE-A532-097A15482855} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0D723A0A-DCE8-4889-935F-BC5A6A8248DA} = {AFDC4FC4-C8E5-4862-846B-50536B59E3EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00840F3F-8412-4CCB-87F3-3482BAD2887D}

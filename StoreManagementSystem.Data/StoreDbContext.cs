@@ -1,11 +1,12 @@
 ﻿namespace StoreManagementSystem.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
 
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext<User>
     {
-        public StoreDbContext(DbContextOptions options)
+        public StoreDbContext(DbContextOptions<StoreDbContext> options)
             : base(options)
         {
         }
@@ -24,11 +25,10 @@
 
         public DbSet<Supplier> Suppliers { get; set; } = null!;
 
-        public DbSet<User> Users { get; set; } = null!;
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
     }

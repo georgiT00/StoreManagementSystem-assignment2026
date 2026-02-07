@@ -10,7 +10,7 @@
     {
 
         private readonly IEnumerable<Category> categories =
-            JsonConvert.DeserializeObject<Category[]>(File.ReadAllText("../StoreManagementSystem.Data/SeedData/CategorySeed.json"));
+            JsonConvert.DeserializeObject<Category[]>(File.ReadAllText("../StoreManagementSystem.Data/SeedData/CategorySeed.json"))!;
 
         public void Configure(EntityTypeBuilder<Category> entity)
         {

@@ -1,28 +1,12 @@
 ﻿namespace StoreManagementSystem.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static GCommon.EntityValidation;
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int UserId { get; set; }
-
-        [Required]
-        [MaxLength(UserNameMaxLength)]
-        public string Username { get; set; } = null!;
-
-        [Required]
-        [MaxLength(UserEmailMaxLength)]
-        [EmailAddress]
-        public string EmailAddress { get; set; } = null!;
-
-        [Required]
-        [MinLength(UserPasswordMinLength)]
-        [MaxLength(UserPasswordMaxLength)]
-        public string Password { get; set; } = null!;
-
         [Required]
         [MaxLength(UserFirstNameMaxLength)]
         public string FirstName { get; set; } = null!;
@@ -33,7 +17,9 @@
 
         [ForeignKey(nameof(Supplier))]  
         public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; } = null!;
+        public virtual Supplier Supplier { get; set; } = null!;
+
+        public virtual Cart Cart { get; set; } = null!;
 
         public virtual ICollection<Order> Orders { get; set; } = [];
     }

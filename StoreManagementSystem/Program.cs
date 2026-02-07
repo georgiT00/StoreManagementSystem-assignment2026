@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using StoreManagementSystem.Data;
 namespace StoreManagementSystem
 {
     using Microsoft.EntityFrameworkCore;
@@ -5,19 +8,26 @@ namespace StoreManagementSystem
 
     using Data;
     using Microsoft.AspNetCore.Identity;
+    using StoreManagementSystem.Data.Models;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("StoreDbContextConnection") ?? throw new InvalidOperationException("Connection string 'StoreDbContextConnection' not found.");
             AppSettings.Initialize(builder.Configuration);
 
             builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database?.ConnectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-           /* builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<StoreDbContext>();*/
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<StoreDbContext>();
+
+            builder.Services.TryAddScoped<UserManager<User>>();
+
+            builder.Services.TryAddScoped<SignInManager<User>>();
 
             builder.Services.AddControllersWithViews();
 
