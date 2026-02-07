@@ -23,7 +23,7 @@
         public Category Category { get; set; } = null!;
 
         [ForeignKey(nameof(Supplier))]
-        public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; } = null!;
+        public int? SupplierId { get; set; }
+        public Supplier? Supplier { get; set; } 
     }
 }

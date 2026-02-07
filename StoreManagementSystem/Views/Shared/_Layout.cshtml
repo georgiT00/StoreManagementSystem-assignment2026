@@ -8,55 +8,70 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
-    <header>
-
-    </header>
     <div class="flex flex-1">
         <nav class="w-64 bg-white shadow-md flex flex-col h-screen">
-            <div class="py-5 px-6 text-5xl text-center border-5 rounded-3">Store</div>
+            <div class="py-5 px-6 text-3xl font-bold text-center text-gray-800">Store</div>
             <div class="p-6">
                 <ul class="space-y-4">
                     <li>
-                        <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold" asp-area="" asp-controller="Home" asp-action="Index">
+                        <a class="block px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition duration-200" asp-area="" asp-controller="Home" asp-action="Index">
                             Dashboard
                         </a>
                     </li>
-                    <li>
-                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Product" asp-action="Index">
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Order" asp-action="Index">
-                            Orders
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block px-4 py-2 rounded hover:bg-yellow-50" asp-area="" asp-controller="Supplier" asp-action="Index">
-                            Suppliers
-                        </a>
-                    </li>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <li>
+                            <a class="block px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition duration-200" asp-area="" asp-controller="Product" asp-action="Index">
+                                Products
+                            </a>
+                        </li>
+                        <li>
+                            <a class="block px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition duration-200" asp-area="" asp-controller="Order" asp-action="Index">
+                                Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a class="block px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition duration-200" asp-area="" asp-controller="Supplier" asp-action="Index">
+                                Suppliers
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
 
-            <div class="mt-auto p-6">
-                <a class="block px-4 py-2 rounded bg-yellow-100 text-yellow-800 font-semibold text-center" asp-area="" asp-controller="Cart" asp-action="Index">
-                    Cart
-                </a>
+            <div class="mt-auto p-6 space-y-3">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <a class="block px-4 py-2 rounded-lg bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-medium text-center transition duration-200" asp-area="" asp-controller="Cart" asp-action="Index">
+                        Cart
+                    </a>
+                    <div class="flex flex-col items-center space-y-2">
+                        <span class="text-gray-800 font-semibold text-center">Hello, @User.Identity.Name</span>
+                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                            <button type="submit" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <partial name="_LoginPartial" />
+                }
             </div>
-            <partial name="_LoginPartial"/>
         </nav>
-        <!-- Main content -->
-        <main class="flex-1 p-8">
+
+        <main class="flex-1 p-6 bg-gray-50">
             @RenderBody()
         </main>
     </div>
+
     <footer class="border-t text-gray-500 text-sm py-4 mt-auto bg-white">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 text-center">
             &copy; 2026 - StoreManagementSystem -
             <a class="text-blue-600 hover:underline" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>   
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -2,7 +2,37 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mx-auto py-8">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-800">Welcome to the Store Management System</h1>
+        <p class="mt-4 text-lg text-gray-600">Your one-stop solution for managing and browsing products.</p>
+    </div>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <div class="mt-8 text-center">
+            <h2 class="text-2xl font-semibold text-green-600">Hello, @User.Identity.Name!</h2>
+            <p class="mt-2 text-gray-700">You are logged in. Start exploring our products.</p>
+            <div class="mt-4">
+                <a asp-controller="Product" asp-action="Index" class="inline-block px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                    Browse Products
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="mt-8 text-center">
+            <h2 class="text-2xl font-semibold text-red-600">Welcome, Guest!</h2>
+            <p class="mt-2 text-gray-700">It seems you are browsing as a guest. Create an account or log in to access more features.</p>
+            <div class="mt-4">
+                <a asp-page="/Account/Register" class="inline-block px-6 py-2 text-white bg-green-600 rounded hover:bg-green-700">
+                    Create an Account
+                </a>
+                <a asp-page="/Account/Login" class="inline-block px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                    Log In
+                </a>
+            </div>
+        </div>
+    }
 </div>

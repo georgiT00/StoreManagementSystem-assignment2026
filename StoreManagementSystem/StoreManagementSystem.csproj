@@ -25,6 +25,7 @@
     <ProjectReference Include="..\StoreManagementSystem.Data.Models\StoreManagementSystem.Data.Models.csproj" />
     <ProjectReference Include="..\StoreManagementSystem.Data\StoreManagementSystem.Data.csproj" />
     <ProjectReference Include="..\StoreManagementSystem.GCommon\StoreManagementSystem.GCommon.csproj" />
+    <ProjectReference Include="..\StoreManagementSystem.Services.Core\StoreManagementSystem.Services.Core.csproj" />
     <ProjectReference Include="..\StoreManagementSystem.Web.ViewModels\StoreManagementSystem.ViewModels.csproj" />
   </ItemGroup>
 

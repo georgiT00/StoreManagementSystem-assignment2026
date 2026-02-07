@@ -16,8 +16,8 @@
         public string LastName { get; set; } = null!;
 
         [ForeignKey(nameof(Supplier))]  
-        public int SupplierId { get; set; }
-        public virtual Supplier Supplier { get; set; } = null!;
+        public int? SupplierId { get; set; }
+        public virtual Supplier? Supplier { get; set; } 
 
         public virtual Cart Cart { get; set; } = null!;
 

@@ -1,26 +1,24 @@
 ﻿namespace StoreManagementSystem.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Data;
+    using Services.Core.Interfaces;
+    using ViewModels.Product;
 
     public class ProductController : Controller
     {
-        private readonly StoreDbContext dbContext;
-        public ProductController(StoreDbContext context)
+        private readonly IProductService productService;
+        public ProductController(IProductService productService)
         {
-            dbContext = context;
+            this.productService = productService;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            /*IEnumerable<Product> products = dbContext.Products
-                .AsNoTracking()
-                .Include(p => p.Category)
-                .Include(p => p.Supplier)
-                .ToList();*/
+            IEnumerable<ProductMinViewModel> products = await productService
+                .GetAllProductsAsync();
 
-            return View();
+            return View(products);
         }
     }
 }

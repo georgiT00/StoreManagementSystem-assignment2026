@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using StoreManagementSystem.Data;
 namespace StoreManagementSystem
 {
     using Microsoft.EntityFrameworkCore;
     using GCommon;
 
     using Data;
-    using Microsoft.AspNetCore.Identity;
-    using StoreManagementSystem.Data.Models;
-    using Microsoft.Extensions.DependencyInjection.Extensions;
+    using Data.Models;
+
+    using Services.Core;
+    using Services.Core.Interfaces;
 
     public class Program
     {
@@ -25,9 +23,7 @@ namespace StoreManagementSystem
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<StoreDbContext>();
 
-            builder.Services.TryAddScoped<UserManager<User>>();
-
-            builder.Services.TryAddScoped<SignInManager<User>>();
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             builder.Services.AddControllersWithViews();
 
