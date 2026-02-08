@@ -5,7 +5,7 @@
         public IEnumerable<ProductMinViewModel> Products { get; set; } 
             = new List<ProductMinViewModel>();
 
-        public IEnumerable<ProductCategoryViewModel> Categories { get; set; } 
-            = new List<ProductCategoryViewModel>();
+        public IEnumerable<ProductAddCategoryViewModel> Categories { get; set; } 
+            = new List<ProductAddCategoryViewModel>();
     }
 }

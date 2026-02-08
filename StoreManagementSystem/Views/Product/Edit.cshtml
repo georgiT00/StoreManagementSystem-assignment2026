@@ -1,12 +1,13 @@
 ﻿@model ProductAddInputModel
 
 @{
-    ViewData["Title"] = "Create Product";
+    ViewData["Title"] = "Edit Product";
 }
 
-<h1 class="text-2xl font-bold mb-6">Create New Product</h1>
+<h1 class="text-2xl font-bold mb-6">Edit Product</h1>
 
-<form asp-action="Create" method="post" class="space-y-4 bg-white p-6 rounded-lg shadow-md">
+<form asp-controller="Product" asp-action="Edit" method="post" class="space-y-4 bg-white p-6 rounded-lg shadow-md">
+
     <div class="mb-4">
         <label asp-for="Name" class="block text-sm font-medium text-gray-700">Product Name</label>
         <input asp-for="Name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
@@ -28,7 +29,6 @@
     <div class="mb-4">
         <label asp-for="CategoryId" class="block text-sm font-medium text-gray-700">Category</label>
         <select asp-for="CategoryId" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            <option value="">-- Select a Category --</option>
             @foreach(var category in Model.Categories)
             {
                 <option value="@category.CategoryId">@category.CategoryName</option>
@@ -38,15 +38,14 @@
     </div>
 
     <div class="mb-4">
-        <label asp-for="SupplierId" class="block text-sm font-medium text-gray-700">Supplier (optional)</label>
+        <label asp-for="SupplierId" class="block text-sm font-medium text-gray-700">Supplier</label>
         <select asp-for="SupplierId" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            <option value="">-- Select a Supplier --</option>
-            @foreach(var supplier in Model.Suppliers)
+            @foreach (var supplier in Model.Suppliers)
             {
                 <option value="@supplier.SupplierId">@supplier.SupplierName</option>
             }
         </select>
-        <span asp-validation-for="SupplierId" class="text-red-500 text-sm"></span>
+        <span asp-validation-for="CategoryId" class="text-red-500 text-sm"></span>
     </div>
 
     <div class="flex justify-end">
@@ -54,7 +53,7 @@
             Cancel
         </a>
         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Create Product
+            Save Changes
         </button>
     </div>
 </form>

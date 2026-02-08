@@ -27,8 +27,8 @@
 
 
         //For dropdown lists in the form
-        public IEnumerable<ProductCategoryViewModel> Categories { get; set; } 
-            = new List<ProductCategoryViewModel>();
+        public IEnumerable<ProductAddCategoryViewModel> Categories { get; set; } 
+            = new List<ProductAddCategoryViewModel>();
 
         public IEnumerable<ProductAddSupplierViewModel> Suppliers { get; set; } 
             = new List<ProductAddSupplierViewModel>();

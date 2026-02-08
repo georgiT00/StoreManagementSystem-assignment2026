@@ -23,7 +23,7 @@
                : await productService.GetAllProductsAsync();
 
 
-            IEnumerable<ProductCategoryViewModel> categories = await productService
+            IEnumerable<ProductAddCategoryViewModel> categories = await productService
                 .GetAllCategoriesAsync();
 
             ProductIndexViewModel productIndexViewModel = new ProductIndexViewModel()
@@ -88,6 +88,64 @@
             }
 
             await productService.CreateProductAsync(inputModel);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ProductAddInputModel productEditViewModel = await productService
+                .GetProductInputModelByProductIdAsync(id);
+
+            if (productEditViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(productEditViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, ProductAddInputModel inputModel)
+        {
+            inputModel.Categories = await productService
+                .GetAllCategoriesAsync();
+            
+            inputModel.Suppliers = await productService
+                .GetAllSuppliersAsync();
+
+            bool isCategoryValid = await productService
+                .CategoryExistsAsync(inputModel.CategoryId);
+
+            bool isSupplierValid = await productService
+                .SupplierExistsAsync(inputModel.SupplierId ?? 0);
+
+            bool isProductValid = await productService
+                .ProductExistsAsync(id);
+
+            if (!isProductValid)
+            {
+                return NotFound();
+            }
+
+            if (!isCategoryValid)
+            {
+                ModelState.AddModelError(nameof(inputModel.CategoryId), "Selected category does not exist.");
+            }
+
+            if (!isSupplierValid && inputModel.SupplierId.HasValue)
+            {
+                ModelState.AddModelError(nameof(inputModel.SupplierId), "Selected supplier does not exist.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+
+            await productService.EditProductAsync(inputModel, id);
             return RedirectToAction(nameof(Index));
         }
     }

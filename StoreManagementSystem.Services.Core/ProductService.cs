@@ -112,12 +112,59 @@
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ProductCategoryViewModel>> GetAllCategoriesAsync()
+        public async Task<ProductAddInputModel?> GetProductInputModelByProductIdAsync(int productId)
         {
-            IEnumerable<ProductCategoryViewModel> allCategories = await dbContext
+            Product? productToEdit = await dbContext
+                .Products
+                .Include(p => p.Category)
+                .Include(p => p.Supplier)
+                .SingleOrDefaultAsync(p => p.ProductId == productId);
+
+            if (productToEdit == null)
+            {
+                return null;
+            }
+
+            ProductAddInputModel productToEditInputModel = new ProductAddInputModel()
+            {
+                Name = productToEdit.Name,
+                Price = productToEdit.Price,
+                Quantity = productToEdit.Quantity,
+                CategoryId = productToEdit.CategoryId,
+                SupplierId = productToEdit.SupplierId,
+                Categories = await GetAllCategoriesAsync(),
+                Suppliers = await GetAllSuppliersAsync()
+            };
+
+            return productToEditInputModel;
+        }
+        public async Task EditProductAsync(ProductAddInputModel inputModel, int productId)
+        {
+            Product? productToEdit = await dbContext
+                .Products
+                .SingleOrDefaultAsync(p => p.ProductId == productId);
+
+            if (productToEdit == null)
+            {
+                throw new Exception($"Product with ID {productId} not found.");
+            }
+
+            productToEdit.Name = inputModel.Name;
+            productToEdit.Price = inputModel.Price;
+            productToEdit.Quantity = inputModel.Quantity;
+            productToEdit.CategoryId = inputModel.CategoryId;
+            productToEdit.SupplierId = inputModel.SupplierId;
+
+            dbContext.Products.Update(productToEdit);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ProductAddCategoryViewModel>> GetAllCategoriesAsync()
+        {
+            IEnumerable<ProductAddCategoryViewModel> allCategories = await dbContext
                 .Categories
                 .AsNoTracking()
-                .Select(c => new ProductCategoryViewModel()
+                .Select(c => new ProductAddCategoryViewModel()
                 {
                     CategoryId = c.CategoryId,
                     CategoryName = c.CategoryName
@@ -154,6 +201,13 @@
             return await dbContext
                 .Suppliers
                 .AnyAsync(s => s.SupplierId == supplierId);
+        }
+
+        public async Task<bool> ProductExistsAsync(int productId)
+        {
+            return await dbContext
+                .Products
+                .AnyAsync(p => p.ProductId == productId);
         }
     }
 }
