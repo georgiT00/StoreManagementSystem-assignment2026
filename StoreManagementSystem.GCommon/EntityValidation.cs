@@ -15,8 +15,13 @@
         public const int UserFirstNameMaxLength = 100;
         public const int UserLastNameMaxLength = 100;
 
-        //ProductItem
+        //Product
+        public const int ItemNameMinLength = 3;
         public const int ItemNameMaxLength = 150;
+        public const int ItemQuantityMinValue = 1;
+        public const int ItemQuantityMaxValue = 1000;
+        public const double ItemPriceMinValue = 0.99;
+        public const double ItemPriceMaxValue = 999.99;
         public const string ItemPriceType = "DECIMAL(5,2)";
 
         //Order
@@ -25,7 +30,5 @@
         //OrderItem
         public const string UnitPriceType = "DECIMAL(5,2)";
 
-        //Payment
-        public const string AmountType = "DECIMAL(7,2)";
     }
 }

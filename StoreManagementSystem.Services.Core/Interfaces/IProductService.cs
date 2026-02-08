@@ -12,6 +12,14 @@
 
         Task<IEnumerable<ProductCategoryViewModel>> GetAllCategoriesAsync();
 
+        Task<IEnumerable<ProductAddSupplierViewModel>> GetAllSuppliersAsync();
+
+        Task<ProductAddInputModel> GetEmptyProductInputModelAsync();
+
         Task<bool> CategoryExistsAsync(int categoryId);
+
+        Task<bool> SupplierExistsAsync(int supplierId);
+
+        Task CreateProductAsync(ProductAddInputModel inputModel);
     }
 }

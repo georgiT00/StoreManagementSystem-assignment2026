@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StoreManagementSystem.GCommon\StoreManagementSystem.GCommon.csproj" />
+  </ItemGroup>
+
 </Project>

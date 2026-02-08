@@ -86,6 +86,32 @@
             return productsByCategory;
         }
 
+        public async Task<ProductAddInputModel> GetEmptyProductInputModelAsync()
+        {
+            ProductAddInputModel emptyProductModel = new ProductAddInputModel()
+            {
+                Categories = await GetAllCategoriesAsync(),
+                Suppliers = await GetAllSuppliersAsync()
+            };
+
+            return emptyProductModel;
+        }
+
+        public async Task CreateProductAsync(ProductAddInputModel inputModel)
+        {
+            Product productToCreate = new Product()
+            {
+                Name = inputModel.Name,
+                Price = inputModel.Price,
+                Quantity = inputModel.Quantity,
+                CategoryId = inputModel.CategoryId,
+                SupplierId = inputModel.SupplierId
+            };
+
+            await dbContext.Products.AddAsync(productToCreate);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<ProductCategoryViewModel>> GetAllCategoriesAsync()
         {
             IEnumerable<ProductCategoryViewModel> allCategories = await dbContext
@@ -101,11 +127,33 @@
             return allCategories;
         }
 
+        public async Task<IEnumerable<ProductAddSupplierViewModel>> GetAllSuppliersAsync()
+        {
+            IEnumerable<ProductAddSupplierViewModel> allSuppliers = await dbContext
+                .Suppliers
+                .AsNoTracking()
+                .Select(s => new ProductAddSupplierViewModel()
+                {
+                    SupplierId = s.SupplierId,
+                    SupplierName = s.SupplierName
+                })
+                .ToArrayAsync();
+
+            return allSuppliers;
+        }
+
         public async Task<bool> CategoryExistsAsync(int categoryId)
         {
             return await dbContext
                 .Categories
                 .AnyAsync(c => c.CategoryId == categoryId);
+        }
+
+        public async Task<bool> SupplierExistsAsync(int supplierId)
+        {
+            return await dbContext
+                .Suppliers
+                .AnyAsync(s => s.SupplierId == supplierId);
         }
     }
 }

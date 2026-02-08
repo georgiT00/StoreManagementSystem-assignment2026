@@ -50,5 +50,45 @@
 
             return View(productDetails);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Create()
+        {
+            ProductAddInputModel productAddViewModel = await productService
+                .GetEmptyProductInputModelAsync();
+
+            return View(productAddViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(ProductAddInputModel inputModel)
+        {
+            inputModel.Categories = await productService.GetAllCategoriesAsync();
+            inputModel.Suppliers = await productService.GetAllSuppliersAsync();
+
+            bool isCategoryValid = await productService.CategoryExistsAsync(inputModel.CategoryId);
+
+            bool isSupplierValid = await productService.SupplierExistsAsync(inputModel.SupplierId ?? 0);
+
+            if (!isCategoryValid)
+            {
+                ModelState.AddModelError(nameof(inputModel.CategoryId), "Selected category does not exist.");
+            }
+
+            if (!isSupplierValid && inputModel.SupplierId.HasValue)
+            {
+                ModelState.AddModelError(nameof(inputModel.SupplierId), "Selected supplier does not exist.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+
+            await productService.CreateProductAsync(inputModel);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
