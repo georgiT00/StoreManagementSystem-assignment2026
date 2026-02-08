@@ -5,12 +5,13 @@
     {
         Task<IEnumerable<ProductMinViewModel>> GetAllProductsAsync();
 
-        //Task<ProductDetailsViewModel> GetProductDetailsByIdAsync(int productId);
-            
-        //Task AddProductAsync(ProductFormModel model);
-    
-        //Task EditProductAsync(int productId, ProductFormModel model);
-    
-        //Task DeleteProductAsync(int productId);
+
+        Task<IEnumerable<ProductMinViewModel>?> GetProductsByCategoryIdAsync(int categoryId);
+
+        Task<ProductDetailsViewModel?> GetProductDetailsByIdAsync(int productId);
+
+        Task<IEnumerable<ProductCategoryViewModel>> GetAllCategoriesAsync();
+
+        Task<bool> CategoryExistsAsync(int categoryId);
     }
 }

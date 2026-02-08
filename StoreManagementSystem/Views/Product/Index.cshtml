@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductMinViewModel>
+﻿@model ProductIndexViewModel
 
 @{
     ViewData["Title"] = "Products";
@@ -6,17 +6,32 @@
 
 <h1 class="text-2xl font-bold mb-6">Products</h1>
 
-@if (Model != null && Model.Any())
+<div class="mb-6">
+    <h2 class="text-lg font-semibold mb-4">Filter by Category:</h2>
+    <div class="flex flex-wrap gap-4">
+        <a asp-controller="Product" asp-action="Index" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+            All
+        </a>
+        @foreach (var category in Model.Categories)
+        {
+            <a asp-controller="Product" asp-action="Index" asp-route-categoryid="@category.CategoryId" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                @category.CategoryName
+            </a>
+        }
+    </div>
+</div>
+
+@if (Model.Products != null && Model.Products.Any())
 {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @foreach (var product in Model)
+        @foreach (var product in Model.Products)
         {
             <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                 <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-                    <span class="text-2xl font-bold text-gray-500">@product.ProductName.Substring(0,1)</span>
+                    <span class="text-2xl font-bold text-gray-500">@product.ProductName.Substring(0, 1)</span>
                 </div>
                 <h2 class="text-lg font-semibold mb-2 text-gray-800">@product.ProductName</h2>
-                <p class="text-gray-600 mb-4">Price: <span class="font-bold text-blue-600">@product.Price</span></p>
+                <p class="text-gray-600 mb-4">Price: <span class="font-bold text-blue-600">$@product.Price</span></p>
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"
                    class="mt-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
                     View Details
