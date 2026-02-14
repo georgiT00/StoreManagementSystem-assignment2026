@@ -24,6 +24,7 @@ namespace StoreManagementSystem
                 .AddEntityFrameworkStores<StoreDbContext>();
 
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICartService, CartService>();
 
             builder.Services.AddControllersWithViews();
 

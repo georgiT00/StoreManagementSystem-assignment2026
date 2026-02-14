@@ -179,7 +179,7 @@ namespace StoreManagementSystem.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagementSystem.Data.Models.CartItem", b =>
@@ -205,7 +205,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagementSystem.Data.Models.Category", b =>
@@ -227,7 +227,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -297,7 +297,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagementSystem.Data.Models.OrderItem", b =>
@@ -326,7 +326,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagementSystem.Data.Models.Product", b =>
@@ -360,7 +360,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -560,7 +560,7 @@ namespace StoreManagementSystem.Data.Migrations
 
                     b.HasKey("SupplierId");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
 
                     b.HasData(
                         new

@@ -3,15 +3,19 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Core.Interfaces;
+    using System.Security.Claims;
     using ViewModels.Product;
 
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly IProductService productService;
 
-        public ProductController(IProductService productService)
+        private readonly ICartService cartService;
+
+        public ProductController(IProductService productService, ICartService cartService)
         {
             this.productService = productService;
+            this.cartService = cartService;
         }
 
         [HttpGet]
@@ -108,11 +112,11 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, ProductAddInputModel inputModel)
+        public async Task<IActionResult> Edit([FromRoute]int id, ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService
                 .GetAllCategoriesAsync();
-            
+
             inputModel.Suppliers = await productService
                 .GetAllSuppliersAsync();
 
@@ -146,6 +150,28 @@
             }
 
             await productService.EditProductAsync(inputModel, id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddToCart([FromRoute]int id)
+        {
+            string userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            bool isProductValid = await productService.ProductExistsAsync(id);
+
+            if (!isProductValid)
+            {
+                return NotFound();
+            }
+
+            await cartService.AddToCartAsync(userId, id);
             return RedirectToAction(nameof(Index));
         }
     }

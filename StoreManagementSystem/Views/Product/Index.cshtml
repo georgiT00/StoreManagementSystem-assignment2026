@@ -38,10 +38,19 @@
                 </div>
                 <h2 class="text-lg font-semibold mb-2 text-gray-800">@product.ProductName</h2>
                 <p class="text-gray-600 mb-4">Price: <span class="font-bold text-blue-600">$@product.Price</span></p>
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"
-                   class="mt-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                    View Details
-                </a>
+
+                <div class="flex gap-3">
+                    <form asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.ProductId" method="post">
+                        <button type="submit" class="mt-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                            Add to Cart
+                        </button>
+                    </form>
+
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"
+                       class="mt-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                        View Details
+                    </a>
+                </div>
             </div>
         }
     </div>

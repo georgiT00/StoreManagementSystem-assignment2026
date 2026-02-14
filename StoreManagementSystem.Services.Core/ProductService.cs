@@ -27,7 +27,7 @@
                 {
                     ProductId = p.ProductId,
                     ProductName = p.Name,
-                    Price = p.Price.ToString("F2")
+                    Price = p.Price
                 })
                 .ToArrayAsync();
 
@@ -79,7 +79,7 @@
                 {
                     ProductId = p.ProductId,
                     ProductName = p.Name,
-                    Price = p.Price.ToString("F2")
+                    Price = p.Price
                 })
                 .ToArrayAsync();
 
@@ -118,6 +118,7 @@
                 .Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(p => p.ProductId == productId);
 
             if (productToEdit == null)
@@ -193,6 +194,7 @@
         {
             return await dbContext
                 .Categories
+                .AsNoTracking()
                 .AnyAsync(c => c.CategoryId == categoryId);
         }
 
@@ -200,6 +202,7 @@
         {
             return await dbContext
                 .Suppliers
+                .AsNoTracking()
                 .AnyAsync(s => s.SupplierId == supplierId);
         }
 
@@ -207,6 +210,7 @@
         {
             return await dbContext
                 .Products
+                .AsNoTracking()
                 .AnyAsync(p => p.ProductId == productId);
         }
     }
