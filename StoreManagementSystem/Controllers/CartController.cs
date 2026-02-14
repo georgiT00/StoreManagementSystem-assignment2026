@@ -31,5 +31,27 @@
             return View(viewModel);
 
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Remove(int id)
+        {
+            string userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            bool isProductInCart = await cartService.IsProductInCartAsync(userId, id);
+
+            if (!isProductInCart)
+            {
+                return NotFound();
+            }
+
+            await cartService.RemoveFromCartAsync(userId, id);
+            return RedirectToAction("Index");
+        }
     }
 }

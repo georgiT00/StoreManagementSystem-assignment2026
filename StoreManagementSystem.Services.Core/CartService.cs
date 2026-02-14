@@ -37,15 +37,47 @@
 
         public async Task AddToCartAsync(string userId, int productId)
         {
-            CartItem itemToAdd = new CartItem
-            {
-                CartId = await GetCartIdByUserIdAsync(userId),
-                ProductId = productId,
-                Quantity = 1
-            };
+            int cartId = await GetCartIdByUserIdAsync(userId);
 
-            await dbContext.CartItems.AddAsync(itemToAdd);
+            CartItem? cartItem = await dbContext
+                .CartItems
+                .Where(i => i.CartId == cartId && i.ProductId == productId)
+                .SingleOrDefaultAsync();
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity++;
+                dbContext.CartItems.Update(cartItem);
+            }
+
+            else
+            {
+                CartItem itemToAdd = new CartItem
+                {
+                    CartId = cartId,
+                    ProductId = productId,
+                    Quantity = 1
+                };
+
+                await dbContext.CartItems.AddAsync(itemToAdd);
+            }
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveFromCartAsync(string userId, int productId)
+        {
+            int cartId = await GetCartIdByUserIdAsync(userId);
+
+            CartItem? cartItem = await dbContext
+                .CartItems
+                .Where(i => i.CartId == cartId && i.ProductId == productId)
+                .SingleOrDefaultAsync();
+
+            if (cartItem != null)
+            {
+                dbContext.CartItems.Remove(cartItem);
+                await dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<CartDetailsViewModel?> GetCartDetailsByUserIdAsync(string userId)
@@ -94,6 +126,17 @@
                 .AnyAsync(c => c.UserId == userId);
 
             return cartExists;
+        }
+
+        public async Task<bool> IsProductInCartAsync(string userId, int productId)
+        {
+            bool isInCart = await dbContext
+                .CartItems
+                .Include(i => i.Cart)
+                .AsNoTracking()
+                .AnyAsync(i => i.Cart.UserId == userId && i.ProductId == productId);
+
+            return isInCart;
         }
     }
 }

@@ -16,6 +16,7 @@
                     <th class="px-4 py-2 text-right">Price</th>
                     <th class="px-4 py-2 text-right">Quantity</th>
                     <th class="px-4 py-2 text-right">Total</th>
+                    <th class="px-4 py-2 text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,13 @@
                         <td class="px-4 py-2 text-right">$@item.Price</td>
                         <td class="px-4 py-2 text-right">@item.Quantity</td>
                         <td class="px-4 py-2 text-right">$@(item.Price* item.Quantity)</td>
+                        <td class="px-4 py-2 text-right">
+                            <form asp-controller="Cart" asp-action="Remove" asp-route-id="@item.ProductId" method="post">
+                                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+                                    Remove
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>

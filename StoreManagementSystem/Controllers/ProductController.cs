@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Core.Interfaces;
-    using System.Security.Claims;
     using ViewModels.Product;
 
     public class ProductController : BaseController
