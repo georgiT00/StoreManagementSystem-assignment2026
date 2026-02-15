@@ -5,6 +5,7 @@
     using Services.Core.Interfaces;
     using ViewModels.Product;
 
+    [Authorize]
     public class ProductController : BaseController
     {
         private readonly IProductService productService;
@@ -18,7 +19,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Index(int? categoryId)
         {
             IEnumerable<ProductMinViewModel> products = categoryId.HasValue
@@ -40,7 +40,6 @@
 
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             ProductDetailsViewModel productDetails = await productService
@@ -55,7 +54,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Create()
         {
             ProductAddInputModel productAddViewModel = await productService
@@ -65,7 +63,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService.GetAllCategoriesAsync();
@@ -95,7 +92,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             ProductAddInputModel productEditViewModel = await productService
@@ -110,7 +106,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Edit([FromRoute]int id, ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService
@@ -152,23 +147,49 @@
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
+        {
+            ProductDetailsViewModel productDetails = await productService.GetProductDetailsByIdAsync(id);
+
+            if (productDetails == null)
+            {
+                return NotFound();
+            }
+
+            ProductDeleteViewModel viewModel = new ProductDeleteViewModel()
+            {
+                ProductName = productDetails.ProductName
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromRoute]int id, ProductDeleteViewModel viewModel)
         {
             bool isProductValid = await productService.ProductExistsAsync(id);
 
             if (!isProductValid)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Product does not exist. Try again.";
+                return View(viewModel);
             }
 
-            await productService.DeleteProductAsync(id);
+            try
+            {
+                await productService.DeleteProductAsync(id);
+            }
+
+            catch(Exception exception)
+            {
+                TempData["ErrorMessage"] = exception.Message;
+                return View(viewModel);
+            }
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddToCart([FromRoute]int id)
         {
             string userId = GetUserId();
