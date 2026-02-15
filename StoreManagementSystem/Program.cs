@@ -20,8 +20,15 @@ namespace StoreManagementSystem
             builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database?.ConnectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<StoreDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddEntityFrameworkStores<StoreDbContext>();
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICartService, CartService>();

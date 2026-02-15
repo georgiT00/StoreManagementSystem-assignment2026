@@ -27,10 +27,10 @@
             <h2 class="text-2xl font-semibold text-red-600">Welcome, Guest!</h2>
             <p class="mt-2 text-gray-700">It seems you are browsing as a guest. Create an account or log in to access more features.</p>
             <div class="mt-4">
-                <a asp-page="/Account/Register" class="inline-block px-6 py-2 text-white bg-green-600 rounded hover:bg-green-700">
+                <a asp-area="Identity" asp-page="/Account/Register" class="inline-block px-6 py-2 text-white bg-green-600 rounded hover:bg-green-700">
                     Create an Account
                 </a>
-                <a asp-page="/Account/Login" class="inline-block px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                <a asp-area="Identity" asp-page="/Account/Login" class="inline-block px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
                     Log In
                 </a>
             </div>
