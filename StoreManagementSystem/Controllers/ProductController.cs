@@ -201,6 +201,10 @@
                 return NotFound();
             }
 
+            ProductDetailsViewModel product = await productService.GetProductDetailsByIdAsync(id);
+
+            TempData["SuccessMessage"] = $"{product!.ProductName} added to Cart";
+
             await cartService.AddToCartAsync(userId, id);
             return RedirectToAction(nameof(Index));
         }
