@@ -9,9 +9,12 @@
     public class CartController : BaseController
     {
         private readonly ICartService cartService;
-        public CartController(ICartService cartService)
+        private readonly ILogger<CartController> logger;
+
+        public CartController(ICartService cartService, ILogger<CartController> logger)
         {
             this.cartService = cartService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -47,11 +50,49 @@
 
             if (!isProductInCart)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "This product is not in your cart.";
+                return RedirectToAction("Index");
             }
 
-            await cartService.RemoveFromCartAsync(userId, id);
+            try
+            {
+                await cartService.RemoveFromCartAsync(userId, id);
+            }
+
+            catch(InvalidOperationException exception)
+            {
+                logger.LogError(exception, $"Error removing product {id} from cart for user {userId}");
+                TempData["ErrorMessage"] = exception.Message;
+                return RedirectToAction("Index");
+            }
+
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> PlaceOrder()
+        {
+            string userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            try
+            {
+                await cartService.CreateOrderAsync(userId);
+            }
+
+            catch(InvalidOperationException exception)
+            {
+                logger.LogError(exception, $"Error placing order for user {userId}");
+                TempData["ErrorMessage"] = exception.Message;
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index", "Order");
         }
     }
 }

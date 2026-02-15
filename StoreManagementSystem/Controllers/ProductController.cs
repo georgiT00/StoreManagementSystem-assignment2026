@@ -154,14 +154,24 @@
 
         [HttpPost]
         [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool isProductValid = await productService.ProductExistsAsync(id);
+
+            if (!isProductValid)
+            {
+                return NotFound();
+            }
+
+            await productService.DeleteProductAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddToCart([FromRoute]int id)
         {
             string userId = GetUserId();
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Unauthorized();
-            }
 
             bool isProductValid = await productService.ProductExistsAsync(id);
 

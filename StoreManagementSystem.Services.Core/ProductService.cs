@@ -112,6 +112,22 @@
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteProductAsync(int productId)
+        {
+            Product? productToDelete = await dbContext
+                .Products
+                .Where(p => p.ProductId == productId)
+                .SingleOrDefaultAsync();
+
+            if (productToDelete == null)
+            {
+                throw new Exception($"Product with ID {productId} not found.");
+            }
+
+            dbContext.Products.Remove(productToDelete);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<ProductAddInputModel?> GetProductInputModelByProductIdAsync(int productId)
         {
             Product? productToEdit = await dbContext

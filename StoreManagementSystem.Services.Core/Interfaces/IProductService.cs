@@ -28,5 +28,7 @@
         Task EditProductAsync(ProductAddInputModel inputModel, int productId);
 
         Task CreateProductAsync(ProductAddInputModel inputModel);
+
+        Task DeleteProductAsync(int productId);
     }
 }

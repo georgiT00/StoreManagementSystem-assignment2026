@@ -17,5 +17,7 @@
         Task<bool> CartExistsForUserAsync(string userId);
         
         Task<bool> IsProductInCartAsync(string userId, int productId);
+
+        Task CreateOrderAsync(string userId);
     }
 }

@@ -3,6 +3,7 @@
     using Interfaces;
     using Data;
     using Data.Models;
+    using Data.Models.Enums;
     using ViewModels.Cart;
 
     using Microsoft.EntityFrameworkCore;
@@ -73,11 +74,65 @@
                 .Where(i => i.CartId == cartId && i.ProductId == productId)
                 .SingleOrDefaultAsync();
 
-            if (cartItem != null)
+            if (cartItem == null)
             {
-                dbContext.CartItems.Remove(cartItem);
-                await dbContext.SaveChangesAsync();
+                throw new InvalidOperationException($"Product does not exist.");
             }
+
+            dbContext.CartItems.Remove(cartItem);
+            await dbContext.SaveChangesAsync();
+        }
+        public async Task CreateOrderAsync(string userId)
+        {
+            Cart? cart = await dbContext
+                .Carts
+                .Include(c => c.Items)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                throw new InvalidOperationException("Cart is empty or does not exist.");
+            }
+
+            Order order = new Order
+            {
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                TotalAmount = cart.Items.Sum(i => i.Product!.Price * i.Quantity),
+                Status = OrderStatus.Pending,
+                Items = new List<OrderItem>()
+            };
+
+            foreach (var cartItem in cart.Items)
+            {
+                if (cartItem.Product == null)
+                {
+                    throw new InvalidOperationException($"Product with ID {cartItem.ProductId} does not exist.");
+                }
+
+                if (cartItem.Product.Quantity < cartItem.Quantity)
+                {
+                    throw new InvalidOperationException($"Not enough stock for product: {cartItem.Product.Name}");
+                }
+
+                var orderItem = new OrderItem
+                {
+                    ProductId = cartItem.ProductId != null ? cartItem.ProductId.Value : 0,
+                    UnitPrice = cartItem.Product.Price,
+                    Quantity = cartItem.Quantity
+                };
+
+                order.Items.Add(orderItem);
+
+                cartItem.Product.Quantity -= cartItem.Quantity;
+            }
+
+            await dbContext.Orders.AddAsync(order);
+            await dbContext.SaveChangesAsync();
+
+            dbContext.CartItems.RemoveRange(cart.Items);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<CartDetailsViewModel?> GetCartDetailsByUserIdAsync(string userId)
