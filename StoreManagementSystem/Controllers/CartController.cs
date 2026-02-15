@@ -6,6 +6,8 @@
     using Services.Core.Interfaces;
     using System.Threading.Tasks;
     using ViewModels.Cart;
+
+    [Authorize]
     public class CartController : BaseController
     {
         private readonly ICartService cartService;
@@ -18,7 +20,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             string userId = GetUserId();
@@ -36,7 +37,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Remove(int id)
         {
             string userId = GetUserId();
@@ -46,7 +46,8 @@
                 return RedirectToAction("Login", "Account");
             }
 
-            bool isProductInCart = await cartService.IsProductInCartAsync(userId, id);
+            bool isProductInCart = await cartService
+                .IsProductInCartAsync(userId, id);
 
             if (!isProductInCart)
             {
@@ -70,7 +71,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> PlaceOrder()
         {
             string userId = GetUserId();

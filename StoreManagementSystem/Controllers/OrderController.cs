@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class OrderController : BaseController
     {
         private readonly IOrderService orderService;
@@ -17,11 +18,11 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             string userId = GetUserId();
-            IEnumerable<OrderDetailsViewModel> viewModel = await orderService.GetOrdersForUserAsync(userId);
+            IEnumerable<OrderDetailsViewModel> viewModel = await orderService
+                .GetOrdersForUserAsync(userId);
 
             return View(viewModel);
         }

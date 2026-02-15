@@ -65,12 +65,16 @@
         [HttpPost]
         public async Task<IActionResult> Create(ProductAddInputModel inputModel)
         {
-            inputModel.Categories = await productService.GetAllCategoriesAsync();
-            inputModel.Suppliers = await productService.GetAllSuppliersAsync();
+            inputModel.Categories = await productService
+                .GetAllCategoriesAsync();
+            inputModel.Suppliers = await productService
+                .GetAllSuppliersAsync();
 
-            bool isCategoryValid = await productService.CategoryExistsAsync(inputModel.CategoryId);
+            bool isCategoryValid = await productService
+                .CategoryExistsAsync(inputModel.CategoryId);
 
-            bool isSupplierValid = await productService.SupplierExistsAsync(inputModel.SupplierId ?? 0);
+            bool isSupplierValid = await productService
+                .SupplierExistsAsync(inputModel.SupplierId ?? 0);
 
             if (!isCategoryValid)
             {
@@ -150,7 +154,8 @@
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            ProductDetailsViewModel productDetails = await productService.GetProductDetailsByIdAsync(id);
+            ProductDetailsViewModel productDetails = await productService
+                .GetProductDetailsByIdAsync(id);
 
             if (productDetails == null)
             {
@@ -168,7 +173,8 @@
         [HttpPost]
         public async Task<IActionResult> Delete([FromRoute]int id, ProductDeleteViewModel viewModel)
         {
-            bool isProductValid = await productService.ProductExistsAsync(id);
+            bool isProductValid = await productService
+                .ProductExistsAsync(id);
 
             if (!isProductValid)
             {
@@ -194,14 +200,16 @@
         {
             string userId = GetUserId();
 
-            bool isProductValid = await productService.ProductExistsAsync(id);
+            bool isProductValid = await productService
+                .ProductExistsAsync(id);
 
             if (!isProductValid)
             {
                 return NotFound();
             }
 
-            ProductDetailsViewModel product = await productService.GetProductDetailsByIdAsync(id);
+            ProductDetailsViewModel product = await productService
+                .GetProductDetailsByIdAsync(id);
 
             TempData["SuccessMessage"] = $"{product!.ProductName} added to Cart";
 
