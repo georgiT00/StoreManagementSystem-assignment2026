@@ -99,7 +99,7 @@
                         Quantity = i.Quantity
                     })
                     .ToList(),
-                    TotalPrice = c.Items.Sum(i => i.Product!.Price * i.Quantity)
+                    TotalPrice = c.Items.Sum(i => i.Product!.Price * i.Quantity).ToString("F2")
                 })
                 .SingleOrDefaultAsync();
 

@@ -5,6 +5,6 @@
         public IEnumerable<CartItemViewModel> Items { get; set; } 
             = new List<CartItemViewModel>();
 
-        public decimal TotalPrice { get; set; }
+        public string TotalPrice { get; set; } = null!;
     }
 }
