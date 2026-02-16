@@ -2,19 +2,28 @@ namespace StoreManagementSystem.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
+    using StoreManagementSystem.Services.Core.Interfaces;
     using ViewModels;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IOrderService orderService;
+        private readonly ILogger<HomeController> logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IOrderService orderService)
         {
-            _logger = logger;
+            this.orderService = orderService;
+            this.logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if(User.Identity!.IsAuthenticated)
+            {
+                string userId = GetUserId();
+                int ordersCount = await orderService.GetOrdersCount(userId);
+                TempData["OrdersCount"] = ordersCount;
+            }
             return View();
         }
 

@@ -208,12 +208,23 @@
                 return NotFound();
             }
 
+            try
+            {
+                await cartService.AddToCartAsync(userId, id);
+            }
+
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error adding product to cart: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+
+
             ProductDetailsViewModel product = await productService
-                .GetProductDetailsByIdAsync(id);
+            .GetProductDetailsByIdAsync(id);
 
             TempData["SuccessMessage"] = $"{product!.ProductName} added to Cart";
 
-            await cartService.AddToCartAsync(userId, id);
             return RedirectToAction(nameof(Index));
         }
     }

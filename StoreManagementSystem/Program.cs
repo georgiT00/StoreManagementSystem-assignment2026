@@ -14,10 +14,11 @@ namespace StoreManagementSystem
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("StoreDbContextConnection") ?? throw new InvalidOperationException("Connection string 'StoreDbContextConnection' not found.");
+            
             AppSettings.Initialize(builder.Configuration);
 
             builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(AppSettings.Database?.ConnectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<User>(options =>

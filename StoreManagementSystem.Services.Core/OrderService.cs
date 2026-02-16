@@ -19,6 +19,7 @@
             this.dbContext = dbContext;
         }
 
+
         public async Task <IEnumerable<OrderDetailsViewModel>> GetOrdersForUserAsync(string userId)
         {
             IEnumerable<OrderDetailsViewModel> orderViewModel = await dbContext
@@ -41,9 +42,18 @@
                         Price = i.UnitPrice
                     }).ToList(),
                 })
+                .OrderByDescending(o => o.OrderId)
                 .ToListAsync();
 
             return orderViewModel;
+        }
+        public async Task<int> GetOrdersCount(string userId)
+        {
+            return await dbContext
+                .Orders
+                .Where(o => o.UserId == userId)
+                .AsNoTracking()
+                .CountAsync();
         }
     }
 }
