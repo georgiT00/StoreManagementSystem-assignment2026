@@ -92,6 +92,7 @@
             }
 
             await productService.CreateProductAsync(inputModel);
+            TempData["SuccessMessage"] = $"{inputModel.Name} Added Successfully.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -148,6 +149,7 @@
             }
 
             await productService.EditProductAsync(inputModel, id);
+            TempData["SuccessMessage"] = $"{inputModel.Name} Edited Successfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -182,6 +184,9 @@
                 return View(viewModel);
             }
 
+            ProductDetailsViewModel? productDetails = await productService
+                .GetProductDetailsByIdAsync(id);
+
             try
             {
                 await productService.DeleteProductAsync(id);
@@ -192,6 +197,8 @@
                 TempData["ErrorMessage"] = exception.Message;
                 return View(viewModel);
             }
+
+            TempData["SuccessMessage"] = $"{productDetails?.ProductName} Deleted Successfully.";
             return RedirectToAction(nameof(Index));
         }
 

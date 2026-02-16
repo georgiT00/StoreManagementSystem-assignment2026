@@ -14,7 +14,7 @@
             <h2 class="text-2xl font-semibold text-green-600">Hello, @User.Identity.Name!</h2>
             <p class="mt-2 text-xl text-gray-700">You are logged in. Start exploring our products.</p>
             <div class="mt-6 flex flex-col items-center space-y-4">
-                <a asp-controller="Product" asp-action="Index" class="text-xl inline-block px-4 py-3 text-white bg-blue-600 rounded hover:bg-blue-700 transition-all duration-200 shadow-lg">
+                <a asp-controller="Product" asp-action="Index" class="text-xl inline-block px-4 py-3 text-white bg-blue-600 rounded hover:bg-blue-700 transition-all duration-200 shadow-sm">
                     Browse Products
                 </a>
                 <p class="text-xl text-gray-700">Currently, you have <span class="font-bold">@TempData["OrdersCount"]</span> pending order(s).</p>
