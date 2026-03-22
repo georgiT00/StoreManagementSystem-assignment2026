@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreManagementSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-100 via-blue-50 to-gray-200 min-h-screen flex">
+<body class="min-h-screen flex">
     <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md border-2 border-blue-700 transition-all duration-200 hover:bg-white hover:text-blue-700 hover:border-blue-600">
         ☰
     </button>
 
-    <nav id="sidebar" class="hidden md:flex w-64 bg-white shadow-lg border-r border-gray-200 h-screen fixed top-0 left-0 flex-col">
+    <nav id="sidebar" class="hidden md:flex w-64 shadow-lg h-screen fixed top-0 left-0 flex-col border-r-2 border-orange-400">
         <div class="py-5 px-6 text-3xl font-bold text-center text-gray-800">Store</div>
         <div class="p-6 flex-1">
             <ul class="space-y-4">
         <li>
-            <a class="flex items-center px-4 py-2 rounded-lg text-gray-800 bg-gray-100 border border-gray-200 hover:bg-blue-100 hover:border-blue-400 hover:text-gray-700 font-medium transition-all duration-200 shadow-sm" asp-area="" asp-controller="Home" asp-action="Index">
+            <a class="flex items-center px-4 py-2 rounded-lg text-black bg-orange-200 border-2 border-orange-300 hover:bg-orange-500 hover:border-orange-600 font-medium transition-all duration-200 shadow-lg" asp-area="" asp-controller="Home" asp-action="Index">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" />
                 </svg>
@@ -27,7 +28,7 @@
     @if (User.Identity?.IsAuthenticated ?? false)
     {
         <li>
-            <a class="flex items-center px-4 py-2 rounded-lg text-gray-800 bg-gray-100 border border-gray-200 hover:bg-blue-100 hover:border-blue-400 hover:text-gray-700 font-medium transition-all duration-200 shadow-sm" asp-area="" asp-controller="Product" asp-action="Index">
+            <a class="flex items-center px-4 py-2 rounded-lg text-black bg-orange-200 border-2 border-orange-300 hover:bg-orange-500 hover:border-orange-600 font-medium transition-all duration-200 shadow-lg" asp-area="" asp-controller="Product" asp-action="Index">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
@@ -35,7 +36,7 @@
             </a>
         </li>
         <li>
-            <a class="flex items-center px-4 py-2 rounded-lg text-gray-800 bg-gray-100 border border-gray-200 hover:bg-blue-100 hover:border-blue-400 hover:text-gray-700 font-medium transition-all duration-200 shadow-sm" asp-area="" asp-controller="Order" asp-action="Index">
+            <a class="flex items-center px-4 py-2 rounded-lg text-black bg-orange-200 border-2 border-orange-300 hover:bg-orange-500 hover:border-orange-600 font-medium transition-all duration-200 shadow-lg" asp-area="" asp-controller="Order" asp-action="Index">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                 </svg>
@@ -49,14 +50,14 @@
         <div class="p-6 space-y-3 bottom-50">
             @if (User.Identity?.IsAuthenticated ?? false)
             {
-                <a class="flex justify-content-center px-4 py-2 rounded-lg text-gray-800 bg-gray-100 border border-gray-200 hover:bg-blue-100 hover:border-blue-400 hover:text-gray-700 font-medium transition-all duration-200 shadow-sm" asp-area="" asp-controller="Cart" asp-action="Index">
+                <a class="flex justify-content-center px-4 py-2 rounded-lg text-black bg-orange-200 border-2 border-orange-300 hover:bg-orange-500 hover:border-orange-600 hover:border-orange-800 font-medium transition-all duration-200 shadow-lg" asp-area="" asp-controller="Cart" asp-action="Index">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                     </svg>
                     Cart
                 </a>
                 <div class="flex flex-col items-center space-y-2">
-                    <span class="text-gray-800 font-semibold text-center">Hello, @User.Identity.Name</span>
+                    <span class="text-black font-semibold text-center">Hello, @User.Identity.Name</span>
                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
                         <button type="submit" class=" flex justify-content-center w-full px-4 py-2 bg-red-600 text-white rounded-lg border-2 border-red-700 hover:bg-red-900 hover:text-red-700 hover:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200 shadow">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -77,11 +78,11 @@
     </nav>
 
     <div class="flex-1 flex flex-col md:ml-64">
-        <main class="flex-1 p-6 bg-white bg-opacity-80 rounded-lg shadow-lg m-4">
+        <main class="flex-1 border-4 border-orange-400 border-double p-6 rounded-lg shadow-lg m-4">
             @RenderBody()
         </main>
 
-        <footer class="border-t text-gray-500 text-sm py-4 bg-gradient-to-r from-blue-50 to-gray-100 shadow-inner">
+        <footer class="border-t-orange-300 text-black text-sm py-4 shadow-inner">
             <div class="container mx-auto px-4 text-center">
                 &copy; 2026 - StoreManagementSystem
             </div>
