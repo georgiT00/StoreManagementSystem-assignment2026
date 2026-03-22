@@ -5,6 +5,10 @@
     using Services.Core.Interfaces;
     using ViewModels.Product;
 
+    using static GCommon.OutputMessages.Product;
+    using static GCommon.AppConstants;
+
+
     [Authorize]
     public class ProductController : BaseController
     {
@@ -78,12 +82,12 @@
 
             if (!isCategoryValid)
             {
-                ModelState.AddModelError(nameof(inputModel.CategoryId), "Selected category does not exist.");
+                ModelState.AddModelError(nameof(inputModel.CategoryId), ProductCategoryNotFoundMsg);
             }
 
             if (!isSupplierValid && inputModel.SupplierId.HasValue)
             {
-                ModelState.AddModelError(nameof(inputModel.SupplierId), "Selected supplier does not exist.");
+                ModelState.AddModelError(nameof(inputModel.SupplierId), ProductSupplierNotFoundMsg);
             }
 
             if (!ModelState.IsValid)
@@ -92,7 +96,7 @@
             }
 
             await productService.CreateProductAsync(inputModel);
-            TempData["SuccessMessage"] = $"{inputModel.Name} Added Successfully.";
+            TempData[SuccessTempDataKey] = String.Format(ProductAddedMsg, inputModel.Name);
             return RedirectToAction(nameof(Index));
         }
 
@@ -135,12 +139,12 @@
 
             if (!isCategoryValid)
             {
-                ModelState.AddModelError(nameof(inputModel.CategoryId), "Selected category does not exist.");
+                ModelState.AddModelError(nameof(inputModel.CategoryId), ProductCategoryNotFoundMsg);
             }
 
             if (!isSupplierValid && inputModel.SupplierId.HasValue)
             {
-                ModelState.AddModelError(nameof(inputModel.SupplierId), "Selected supplier does not exist.");
+                ModelState.AddModelError(nameof(inputModel.SupplierId), ProductSupplierNotFoundMsg);
             }
 
             if (!ModelState.IsValid)
@@ -149,7 +153,7 @@
             }
 
             await productService.EditProductAsync(inputModel, id);
-            TempData["SuccessMessage"] = $"{inputModel.Name} Edited Successfully";
+            TempData[SuccessTempDataKey] = String.Format(ProductEditedMsg, inputModel.Name);
             return RedirectToAction(nameof(Index));
         }
 
@@ -180,8 +184,7 @@
 
             if (!isProductValid)
             {
-                TempData["ErrorMessage"] = "Product does not exist. Try again.";
-                return View(viewModel);
+                return NotFound();
             }
 
             ProductDetailsViewModel? productDetails = await productService
@@ -194,11 +197,11 @@
 
             catch(Exception exception)
             {
-                TempData["ErrorMessage"] = exception.Message;
+                TempData[ErrorTempDataKey] = exception.Message;
                 return View(viewModel);
             }
 
-            TempData["SuccessMessage"] = $"{productDetails?.ProductName} Deleted Successfully.";
+            TempData[SuccessTempDataKey] = String.Format(ProductDeletedMsg, productDetails!.ProductName);
             return RedirectToAction(nameof(Index));
         }
 
@@ -220,9 +223,9 @@
                 await cartService.AddToCartAsync(userId, id);
             }
 
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                TempData["ErrorMessage"] = $"Error adding product to cart: {ex.Message}";
+                TempData[ErrorTempDataKey] = exception.Message;
                 return RedirectToAction(nameof(Index));
             }
 
@@ -230,7 +233,7 @@
             ProductDetailsViewModel product = await productService
             .GetProductDetailsByIdAsync(id);
 
-            TempData["SuccessMessage"] = $"{product!.ProductName} added to Cart";
+            TempData[SuccessTempDataKey] = String.Format(ProductAddedToCartMsg, product!.ProductName);
 
             return RedirectToAction(nameof(Index));
         }

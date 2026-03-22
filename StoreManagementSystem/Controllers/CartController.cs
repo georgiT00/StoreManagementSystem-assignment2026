@@ -7,6 +7,9 @@
     using System.Threading.Tasks;
     using ViewModels.Cart;
 
+    using static GCommon.AppConstants;
+    using static GCommon.OutputMessages.Cart;
+
     [Authorize]
     public class CartController : BaseController
     {
@@ -51,7 +54,7 @@
 
             if (!isProductInCart)
             {
-                TempData["ErrorMessage"] = "This product is not in your cart.";
+                TempData[ErrorTempDataKey] = ProductNotInCartMsg;
                 return RedirectToAction("Index");
             }
 
@@ -62,8 +65,8 @@
 
             catch(InvalidOperationException exception)
             {
-                logger.LogError(exception, $"Error removing product {id} from cart for user {userId}");
-                TempData["ErrorMessage"] = exception.Message;
+                logger.LogError(exception.Message);
+                TempData[ErrorTempDataKey] = ProductRemoveFromCartErrorMsg;
                 return RedirectToAction("Index");
             }
 
@@ -87,8 +90,8 @@
 
             catch(InvalidOperationException exception)
             {
-                logger.LogError(exception, $"Error placing order for user {userId}");
-                TempData["ErrorMessage"] = exception.Message;
+                logger.LogError(exception.Message);
+                TempData[ErrorTempDataKey] = PlaceOrderErrorMsg;
                 return RedirectToAction("Index");
             }
 

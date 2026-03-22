@@ -5,6 +5,8 @@ namespace StoreManagementSystem.Controllers
     using StoreManagementSystem.Services.Core.Interfaces;
     using ViewModels;
 
+    using static GCommon.AppConstants;
+
     public class HomeController : BaseController
     {
         private readonly IOrderService orderService;
@@ -22,7 +24,7 @@ namespace StoreManagementSystem.Controllers
             {
                 string userId = GetUserId();
                 int ordersCount = await orderService.GetOrdersCount(userId);
-                TempData["OrdersCount"] = ordersCount;
+                TempData[OrderCountTempDataKey] = ordersCount;
             }
             return View();
         }
