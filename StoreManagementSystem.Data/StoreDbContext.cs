@@ -1,10 +1,11 @@
 ﻿namespace StoreManagementSystem.Data
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
 
-    public class StoreDbContext : IdentityDbContext<User>
+    public class StoreDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public StoreDbContext(DbContextOptions<StoreDbContext> options)
             : base(options)

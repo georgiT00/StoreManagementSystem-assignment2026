@@ -21,5 +21,10 @@
             public const string ProductRemoveFromCartErrorMsg = "An error occurred while trying to remove the product from your cart. Try again.";
             public const string PlaceOrderErrorMsg = "An error occurred while trying to place your order. Try again.";
         }
+
+        public static class Role
+        {
+            public const string RoleAddErrorMsg = "An error occurred while trying to add the role - {0}.";
+        }
     }
 }

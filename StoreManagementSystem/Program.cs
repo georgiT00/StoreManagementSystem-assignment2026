@@ -5,9 +5,14 @@ namespace StoreManagementSystem
 
     using Data;
     using Data.Models;
+    using Data.SeedData;
+    using Data.SeedData.Interfaces;
 
     using Services.Core;
     using Services.Core.Interfaces;
+
+    using Web.Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Identity;
 
     public class Program
     {
@@ -29,11 +34,14 @@ namespace StoreManagementSystem
                 options.Password.RequireUppercase = false;
                 options.SignIn.RequireConfirmedAccount = false;
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<StoreDbContext>();
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+
+            builder.Services.AddTransient<IIdentityRoleSeed, IdentityRoleSeed>();
 
             builder.Services.AddControllersWithViews();
 
@@ -61,6 +69,8 @@ namespace StoreManagementSystem
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseRoleSeed();
 
             app.MapControllerRoute(
                 name: "default",
