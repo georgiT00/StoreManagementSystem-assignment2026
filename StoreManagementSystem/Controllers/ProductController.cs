@@ -67,6 +67,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService

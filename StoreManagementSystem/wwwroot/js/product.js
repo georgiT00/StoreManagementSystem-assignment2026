@@ -25,4 +25,33 @@
             }
         });
     });
+    $(document).on('click', '#add-to-cart', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const productId = $(this).attr("data-product-id");
+
+        $.ajax({
+            url: `/Product/AddToCart/${productId}`,
+            type: 'POST',
+            data: { id: productId },
+            success: function () {
+                const productName = $(`[data-product-id="${productId}"]`).data("product-name");
+                $('#successMsg').text(`Product '${productName}' added to cart successfully!`);
+                $('#success').fadeIn();
+
+                setTimeout(function () {
+                    $('#success').fadeOut();
+                }, 3000);
+            },
+            error: function () {
+                $('#errorMsg').text(`Product does not exist!`)
+                $('#error').fadeIn();
+
+                setTimeout(function () {
+                    $('#error').fadeOut();
+                }, 3000);
+            }
+        });
+    });
 });
