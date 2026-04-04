@@ -21,5 +21,20 @@
             }
             return app;
         }
+
+        public static IApplicationBuilder UseAdminUserSeed(this IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                IIdentityRoleSeed adminSeeder = scope.ServiceProvider
+                    .GetRequiredService<IIdentityRoleSeed>();
+
+                adminSeeder
+                    .SeedAdminUserAsync()
+                    .GetAwaiter()
+                    .GetResult();
+            }
+            return app;
+        }
     }
 }

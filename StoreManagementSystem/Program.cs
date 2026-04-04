@@ -71,6 +71,11 @@ namespace StoreManagementSystem
             app.UseAuthorization();
 
             app.UseRoleSeed();
+            app.UseAdminUserSeed();
+
+            app.MapControllerRoute(
+                name: "admin",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

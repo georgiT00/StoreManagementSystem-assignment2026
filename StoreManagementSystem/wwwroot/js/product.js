@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    $("#product-details").on("click", function (e) {
+    $(document).on('click', '#product-details', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        const id = $(this).attr("data-product-id");
+        const id = $(this).data("product-id");
 
         $.ajax({
             url: `/api/ProductApi/${id}`,
@@ -29,7 +29,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        const productId = $(this).attr("data-product-id");
+        const productId = $(this).data("product-id");
 
         $.ajax({
             url: `/Product/AddToCart/${productId}`,

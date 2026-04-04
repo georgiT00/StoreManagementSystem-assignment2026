@@ -26,5 +26,14 @@
         {
             public const string RoleAddErrorMsg = "An error occurred while trying to add the role - {0}.";
         }
+
+        public static class AdminUser
+        {
+            public const string AdminUserNameNotFoundMsg = "Admin username not found in app settings.";
+
+            public const string AdminUserPasswordNotMatchMsg = "Incorrect password for Admin user.";
+
+            public const string AdminUserAddErrorMsg = "An error occurred while trying to add the admin user with username - {0}.";
+        }
     }
 }

@@ -3,5 +3,7 @@
     public interface IIdentityRoleSeed
     {
         Task SeedRolesAsync();
+
+        Task SeedAdminUserAsync();
     }
 }
