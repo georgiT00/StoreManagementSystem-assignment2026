@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Admin Panel</h1>
+    <p class="text-lg text-gray-600 mb-6">Manage users and products from this panel.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a asp-area="Admin" asp-controller="UserManager" asp-action="Index"
+           class="block text-3xl text-center px-6 py-4 bg-amber-600 text-black font-semibold rounded-lg shadow-md hover:bg-amber-700 transition">
+            Manage Users
+        </a>
+
+        <a asp-area="Admin" asp-controller="ProductManager" asp-action="Index"
+           class="block text-3xl text-center px-6 py-4 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
+            Manage Products
+        </a>
+    </div>
+</div>
