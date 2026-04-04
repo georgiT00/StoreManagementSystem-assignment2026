@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Identity.Client;
     using System.Security.Claims;
 
     [Area("Admin")]
