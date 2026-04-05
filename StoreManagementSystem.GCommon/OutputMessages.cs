@@ -35,5 +35,10 @@
 
             public const string AdminUserAddErrorMsg = "An error occurred while trying to add the admin user with username - {0}.";
         }
+
+        public static class User
+        {
+            public const string UserNotFoundMsg = "User not found.";
+        }
     }
 }

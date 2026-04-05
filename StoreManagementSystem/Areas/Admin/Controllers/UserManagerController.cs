@@ -23,5 +23,12 @@
 
             return View(userViewModel);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            UserInputModel userInputModel = await userService.GetUserEditInputModel(id);
+            return View(userInputModel);
+        }
     }
 }
