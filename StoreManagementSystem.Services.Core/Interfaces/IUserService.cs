@@ -4,6 +4,6 @@
 
     public interface IUserService
     {
-        Task<IEnumerable<UserManageViewModel>> GetAllUsersAsync();
+        Task<IEnumerable<UserManageViewModel>> GetAllUsersExcludeAdminAsync();
     }
 }

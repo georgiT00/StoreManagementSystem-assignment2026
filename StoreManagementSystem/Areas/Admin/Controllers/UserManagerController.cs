@@ -19,7 +19,7 @@
         public async Task<IActionResult> Index()
         {
             IEnumerable<UserManageViewModel> userViewModel = await userService
-                .GetAllUsersAsync();
+                .GetAllUsersExcludeAdminAsync();
 
             return View(userViewModel);
         }
