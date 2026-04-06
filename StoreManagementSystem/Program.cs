@@ -74,6 +74,8 @@ namespace StoreManagementSystem
             app.UseRoleSeed();
             app.UseAdminUserSeed();
 
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
+
             app.MapControllerRoute(
                 name: "admin",
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

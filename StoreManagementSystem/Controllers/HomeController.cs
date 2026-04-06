@@ -29,9 +29,20 @@ namespace StoreManagementSystem.Controllers
             return View();
         }
 
+        [Route("/Home/Error/{code}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int code)
         {
+            if (code == StatusCodes.Status404NotFound)
+            {
+                return View("NotFound");
+            }
+
+            if (code == StatusCodes.Status400BadRequest)
+            {
+                return View("BadRequest");
+            }
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
