@@ -11,6 +11,18 @@
         <input type="hidden" asp-for="Id" />
 
         <div>
+            <label asp-for="FirstName" class="block font-medium text-gray-700 text-xl">First Name</label>
+            <input asp-for="FirstName" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <span asp-validation-for="FirstName" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div>
+            <label asp-for="LastName" class="block font-medium text-gray-700 text-xl">Last Name</label>
+            <input asp-for="LastName" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <span asp-validation-for="LastName" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div>
             <label asp-for="UserName" class="block font-medium text-gray-700 text-xl">Username</label>
             <input asp-for="UserName" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
             <span asp-validation-for="UserName" class="text-red-500 text-sm"></span>
@@ -31,6 +43,7 @@
         <div>
             <label asp-for="RoleId" class="block font-medium text-gray-700 text-xl">Role</label>
             <select asp-for="RoleId" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Select Role...</option>
                 @foreach(var role in Model.Roles)
                 {
                     <option value="@role.RoleId">@role.RoleName</option>

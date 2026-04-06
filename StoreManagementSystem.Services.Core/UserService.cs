@@ -6,6 +6,7 @@
     using ViewModels.Admin.User;
     using static GCommon.OutputMessages.AdminUser;
     using static GCommon.OutputMessages.User;
+    using static GCommon.OutputMessages.Role;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@
 
             IEnumerable<User> users = await dbContext
                 .Users
-                .Except(dbContext.Users.Where(u => u.UserName == adminUserName))
+                .Where(u => u.UserName != adminUserName)
                 .ToListAsync();
 
             ICollection<UserManageViewModel> userViewModel = 
@@ -80,15 +81,53 @@
                 LastName = user.LastName,
                 Email = user.Email!,
                 RoleId = userRoleId ?? string.Empty,
-                Roles = GetAllRoles()
             };
 
             return inputModel;
         }
 
-        public Task EditUserAsync(string userId)
+        public async Task EditUserAsync(UserInputModel inputModel, string userId)
         {
-            throw new NotImplementedException();
+            User? user = dbContext.Users.Find(userId);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException(UserNotFoundMsg);
+            }
+
+            user.FirstName = inputModel.FirstName;
+            user.LastName = inputModel.LastName;
+            user.Email = inputModel.Email;
+            user.UserName = inputModel.UserName;
+            user.PhoneNumber = inputModel.PhoneNumber;
+
+            IdentityRole? newRole = roleManager.Roles.FirstOrDefault(r => r.Id == inputModel.RoleId);
+
+            if (newRole == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            string? currentRole = (await userManager
+                .GetRolesAsync(user)).FirstOrDefault();
+
+            if (currentRole != null && currentRole != newRole.Name)
+            {
+                await userManager.RemoveFromRoleAsync(user, currentRole);
+                await userManager.AddToRoleAsync(user, newRole.Name!);
+            }
+
+            else if (currentRole == null)
+            {
+                await userManager.AddToRoleAsync(user, newRole.Name!);
+            }
+
+            IdentityResult result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public IEnumerable<UserRoleViewModel> GetAllRoles()

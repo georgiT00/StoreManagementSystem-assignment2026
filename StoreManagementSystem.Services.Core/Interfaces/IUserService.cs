@@ -10,6 +10,6 @@
 
         IEnumerable<UserRoleViewModel> GetAllRoles();
 
-        Task EditUserAsync(string userId);
+        Task EditUserAsync(UserInputModel inputModel, string userId);
     }
 }

@@ -14,6 +14,7 @@
         public const int UserLastNameMinLength = 3;
         public const int UserFirstNameMaxLength = 100;
         public const int UserLastNameMaxLength = 100;
+        public const string PhoneRegexPattern = @"[0]\d{9}";
 
         //Product
         public const int ItemNameMinLength = 3;

@@ -25,6 +25,7 @@
         public static class Role
         {
             public const string RoleAddErrorMsg = "An error occurred while trying to add the role - {0}.";
+            public const string RoleNotFoundMsg = "Role not found.";
         }
 
         public static class AdminUser
@@ -39,6 +40,8 @@
         public static class User
         {
             public const string UserNotFoundMsg = "User not found.";
+
+            public const string UserEditErrorMsg = "An error occurred while trying to edit the user - {0}.";
         }
     }
 }
