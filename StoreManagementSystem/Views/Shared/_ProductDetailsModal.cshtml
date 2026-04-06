@@ -12,12 +12,15 @@
                 <p><strong>Price:</strong> <span id="productPrice" class="text-black font-bold"></span></p>
             </div>
             <div class="modal-footer">
-                <a id="editProductLink" class="btn btn-warning">
-                    Edit
-                </a>
-                <a id="deleteProductLink" class="btn btn-danger">
-                    Delete
-                </a>
+                @if (User.IsInRole("Manager"))
+                {
+                    <a id="editProductLink" class="btn btn-warning">
+                        Edit
+                    </a>
+                    <a id="deleteProductLink" class="btn btn-danger">
+                        Delete
+                    </a>
+                }
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

@@ -58,6 +58,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Create()
         {
             ProductAddInputModel productAddViewModel = await productService
@@ -68,6 +69,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Create(ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService
@@ -102,6 +104,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int id)
         {
             ProductAddInputModel productEditViewModel = await productService
@@ -116,6 +119,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit([FromRoute]int id, ProductAddInputModel inputModel)
         {
             inputModel.Categories = await productService
@@ -159,6 +163,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int id)
         {
             ProductDetailsViewModel productDetails = await productService
@@ -178,6 +183,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete([FromRoute]int id, ProductDeleteViewModel viewModel)
         {
             bool isProductValid = await productService
