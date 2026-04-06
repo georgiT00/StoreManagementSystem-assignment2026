@@ -33,6 +33,8 @@ Upon registering, the user's role by default is "User". The user can access basi
 The "Manager" role is capable of creating, editing and removing products. <br>
 "Admin" has the ability to assign other users to different roles. 
 
+Admin login credentials can be found in appsettings.Development.json
+
 
 ---
 ## 🛠️ Technologies Used
