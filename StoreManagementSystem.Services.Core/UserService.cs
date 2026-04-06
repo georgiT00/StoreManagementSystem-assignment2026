@@ -130,10 +130,11 @@
             }
         }
 
-        public IEnumerable<UserRoleViewModel> GetAllRoles()
+        public IEnumerable<UserRoleViewModel> GetAllRolesExceptAdmin()
         {
             IEnumerable<UserRoleViewModel> allRoles = roleManager
                 .Roles
+                .Where(r => r.Name != "Admin")
                 .Select(r => new UserRoleViewModel
                 {
                     RoleId = r.Id,

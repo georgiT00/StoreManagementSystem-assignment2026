@@ -8,7 +8,7 @@
 
         Task<UserInputModel> GetUserEditInputModel(string userId);
 
-        IEnumerable<UserRoleViewModel> GetAllRoles();
+        IEnumerable<UserRoleViewModel> GetAllRolesExceptAdmin();
 
         Task EditUserAsync(UserInputModel inputModel, string userId);
     }

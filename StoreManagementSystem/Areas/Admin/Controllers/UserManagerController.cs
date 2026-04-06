@@ -31,19 +31,19 @@
         {
             UserInputModel userInputModel = await userService.GetUserEditInputModel(id);
 
-            userInputModel.Roles = userService.GetAllRoles();
+            userInputModel.Roles = userService.GetAllRolesExceptAdmin();
             return View(userInputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(UserInputModel inputModel, [FromRoute] string id)
         { 
-            IEnumerable<UserRoleViewModel> allRoles = userService.GetAllRoles();
+            IEnumerable<UserRoleViewModel> allRoles = userService.GetAllRolesExceptAdmin();
 
             if (inputModel.RoleId == null || !allRoles.Any(r => r.RoleId == inputModel.RoleId))
             {
                 ModelState.AddModelError(nameof(inputModel.RoleId), "Selected role does not exist.");
-                inputModel.Roles = userService.GetAllRoles();
+                inputModel.Roles = allRoles;
                 return View(inputModel);
             }
 
@@ -51,7 +51,7 @@
             {
                 ModelState.AddModelError(string.Empty, String.Format(UserEditErrorMsg, inputModel.UserName));
 
-                inputModel.Roles = userService.GetAllRoles();
+                inputModel.Roles = allRoles;
 
                 return View(inputModel);
             }
@@ -64,7 +64,7 @@
             {
                 ModelState.AddModelError(string.Empty, String.Format(UserEditErrorMsg, inputModel.UserName));
 
-                inputModel.Roles = userService.GetAllRoles();
+                inputModel.Roles = allRoles;
 
                 return View(inputModel);
             }
