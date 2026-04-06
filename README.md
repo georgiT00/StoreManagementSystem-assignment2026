@@ -29,9 +29,10 @@ Store Management System offers users variety of features such as:
 - Removing a Product from Cart
 - Placing Order containing Products
 
-For now all those features are available for the users. 
+Upon registering, the user's role by default is "User". The user can access basic functionalitites (adding a product to cart, placing order). <br>
+The "Manager" role is capable of creating, editing and removing products. <br>
+"Admin" has the ability to assign other users to different roles. 
 
-Roles will be implemented in the future (User, Admin).
 
 ---
 ## 🛠️ Technologies Used
@@ -94,6 +95,7 @@ StoreManagementSystem/
 ├── ViewModels/           # ViewModels
 ├── Data/                 # DbContext and migrations
 ├── Services/             # Business logic / service layer
+├── Tests/                # Unit Tests for services
 ├── wwwroot/              # Static files (CSS, JS, images)
 ├── appsettings.json      # App configuration
 └── Program.cs            # App entry point and middleware setup
@@ -112,7 +114,6 @@ StoreManagementSystem/
 
 ## 💻 Usage
 
-Describe how to use the main features of the app after launching it. Add screenshots if possible.
 
 ```
 1. Navigate to /Register to create an account.
@@ -142,4 +143,4 @@ Update-Database
 ```
 
 
-*Built as part of the **ASP.NET Fundamentals** course.*
+*Built as part of the **ASP.NET Advanced** course.*
